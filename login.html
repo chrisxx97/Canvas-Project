@@ -1,0 +1,37 @@
+<html>
+<head>
+	<link rel="stylesheet" href="canvas.css">
+	<script>
+		function validate() {
+			let name = document.myform.cnetid.value;
+			let pw = document.myform.pw.value;
+
+			if (name==null || name==""){  
+  				alert("Name can't be blank");  
+  				return false;  
+
+			};
+			if (pw==null || pw==""){  
+  				alert("Password can't be blank");  
+  				return false;  
+
+			};
+			// need to validate if password matches data in the system
+
+	</script>
+</head>
+<body>
+	<h1>The University of Chicago</h1>
+	<br>
+	<h4>Log in to Your UChicago Account</h4>
+	<br>
+	<form name="myform" action="/action_page.php">
+		<input type="text" id="cnetid" name="cnetid" placeholder="CNetID / UCMEDID"><br>
+		<input type="text" id="pw" name="pw" placeholder="Password"><br><br>
+		<a href="file:///Users/apple/Desktop/Web%20Project/forgotpw.html">Forgot your password?</a><br>
+		<a href="file:///Users/apple/Desktop/Web%20Project/signup.html">Sign up</a><br></br>
+		<button type="submit">LOG IN</button>
+	</form>
+	<br>
+	<p>To securely log out, you must restart your browser.</p> 
+</html>
