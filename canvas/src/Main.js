@@ -36,7 +36,7 @@ class Main extends Component {
                             </NavLink>
                         </li>
                         <li className="menu-item">
-                            <NavLink to="/courses">
+                            <NavLink to="/courses" onclick={openCourseBar}>
                                 <div>Courses</div>
                             </NavLink>
                         </li>
@@ -65,6 +65,11 @@ class Main extends Component {
             </BrowserRouter>
         );
     }
+}
+
+function openCourseBar() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("courses-content").style.left = "250px";
 }
 
 export default Main;
