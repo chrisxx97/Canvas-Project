@@ -30,16 +30,6 @@
   transform: translateY(-50%);
 }
 
-<<<<<<< Updated upstream
-.menu-item button {
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-=======
 .menu-item a{
     text-decoration: none;
     color: white;
@@ -47,7 +37,6 @@
     font-family: inherit;
     padding: 10px;
     display: inline-block;
->>>>>>> Stashed changes
 }
 
 .menu-item:hover {
