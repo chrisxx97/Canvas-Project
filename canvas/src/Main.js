@@ -50,7 +50,7 @@ class Main extends Component {
                                 <div>Settings</div>
                             </NavLink>
                         </li>
-                        <li classNameName="menu-item">
+                        <li className="menu-item">
                             <NavLink to="logout">
                                 <div>Logout</div>
                             </NavLink>
