@@ -7,4 +7,4 @@ You have you go to any other page, and then click on "course" again to select a 
 Questions:
 1. How do we pass student info from component to another
 2. Do we need a new component for each of student, teacher, admin? Since they have different functionalities?
-3. 
+3. Use flask in python, simple apis, 

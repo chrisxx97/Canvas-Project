@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
     Route,
     Routes,
@@ -10,8 +10,18 @@ import Account from "./Account";
 import Settings from "./Settings";
 import Logout from "./Logout";
 import Courses_menu from "./Courses_menu";
-
+import openCourseBar from "./Courses_menu";
 class Main extends Component {
+    // use user state
+    // pass state itself to components or pass setter function to the lower components
+    // constructor(props){
+    //     super(props)
+    //     this.state = {nameState:""}
+        // this.setState({nameState: “Chris-xu”});
+
+    // }
+
+    //  [nameState, setNameState] = useState("");
     render() {
         return (
             
@@ -39,7 +49,7 @@ class Main extends Component {
                         </li>
                         <li className="menu-item"  >
                            
-                        <NavLink to="/courses_menu" onClick = {this.refresh} >
+                        <NavLink to="/courses_menu" onClick = {openCourseBar} >
                             <img className = "menu-icon" alt = "" src="course.png"/>
                             <div >Courses</div>
                         </NavLink>

@@ -4,7 +4,7 @@ import Courses_page from "./Courses_page";
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
 
 
-function openCourseBar() {
+export function openCourseBar() {
     document.getElementById("mySidenav").style.width = "250px";
     // document.getElementById("courses-content").style.left = "250px";
 }
