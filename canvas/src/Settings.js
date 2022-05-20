@@ -6,51 +6,70 @@ https://www.w3schools.com/howto/howto_js_filter_table.asp
 import React, { Component } from "react";
 import "./Settings.css";
 
-function usersSearch() {
-    let input, filter, table, tr, tdName, tdEmail, i, name, email;
-    input = document.getElementById("search");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("users-table");
-    tr = table.getElementsByTagName("tr");
+class Settings extends Component {
 
-    for (i = 0; i < tr.length; i++) {
-        tdName = tr[i].getElementsByTagName("td")[0];
-        tdEmail = tr[i].getElementsByTagName("td")[1];
-        if (tdName) {  // if (tdName && tdEmail)
-            name = tdName.textContent || tdName.innerText;
-            email = tdEmail.textContent || tdEmail.innerText;
+    usersSearch() {
+        let input, filter, table, tr, tdName, tdEmail, i, name, email;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("users-table");
+        tr = table.getElementsByTagName("tr");
 
-            if (name.toUpperCase().indexOf(filter) > -1 || email.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
+        for (i = 0; i < tr.length; i++) {
+            tdName = tr[i].getElementsByTagName("td")[0];
+            tdEmail = tr[i].getElementsByTagName("td")[1];
+            if (tdName) {  // if (tdName && tdEmail)
+                name = tdName.textContent || tdName.innerText;
+                email = tdEmail.textContent || tdEmail.innerText;
+
+                if (name.toUpperCase().indexOf(filter) > -1 || email.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
             }
         }
     }
-}
 
-function usersFilter() {
+    usersFilter(event) {
+        let filter, table, tr, tdStatus, tdStatusStr, i;
+        filter = event.target.value;
+        table = document.getElementById("users-table");
+        tr = table.getElementsByTagName("tr");
 
-}
+        for (i = 0; i < tr.length; i++) {
+            tdStatus = tr[i].getElementsByTagName("td")[3];
+            if (tdStatus) {
+                tdStatusStr = tdStatus.textContent || tdStatus.innerText;
+                if (!filter.localeCompare("all") || !tdStatusStr.toLowerCase().localeCompare(filter)) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
 
-class Settings extends Component {
     render() {
         return (
             <div>
                 <h2>Settings</h2>
                 <h3>Registered Users</h3>
 
-                Search: <input type="text" id="search" onKeyUp={usersSearch} placeholder="Name or Email" />
-                <br />
+                <div>
+                    Search: <input type="text" id="search" onKeyUp={this.usersSearch} placeholder="Name or Email" />
+                </div>
 
-                Filter by Status:
-                <input type="radio" id="all" name="filter" value="all" onKeyUp={usersFilter} />
-                <label htmlFor="active">All</label>
-                <input type="radio" id="active" name="filter" value="active" onKeyUp={usersFilter} />
-                <label htmlFor="active">Active</label>
-                <input type="radio" id="inactive" name="filter" value="inactive" onKeyUp={usersFilter} />
-                <label htmlFor="inactive">Inactive</label>
-                <br /><br />
+                <div onChange={this.usersFilter}>
+                    Filter by Status:
+                    <input type="radio" id="all" name="filter" value="all" />
+                    <label htmlFor="all">All</label>
+                    <input type="radio" id="active" name="filter" value="active" />
+                    <label htmlFor="active">Active</label>
+                    <input type="radio" id="inactive" name="filter" value="inactive" />
+                    <label htmlFor="inactive">Inactive</label>
+                </div>
+                <br />
 
                 <table id="users-table" border="1">
                     <tr>
