@@ -8,40 +8,26 @@ import "./Settings.css";
 
 class Settings extends Component {
 
-    usersSearch() {
-        let input, filter, table, tr, tdName, tdEmail, i, name, email;
+    usersSearchFilter(event) {
+        let input, keyword, filter, table, tr, tdName, tdEmail, tdStatus, i, name, email, tdStatusStr;
         input = document.getElementById("search");
-        filter = input.value.toUpperCase();
+        keyword = input.value.toUpperCase();
+        filter = getRadioValue("filter")
         table = document.getElementById("users-table");
         tr = table.getElementsByTagName("tr");
 
         for (i = 0; i < tr.length; i++) {
             tdName = tr[i].getElementsByTagName("td")[0];
             tdEmail = tr[i].getElementsByTagName("td")[1];
-            if (tdName) {  // if (tdName && tdEmail)
+            tdStatus = tr[i].getElementsByTagName("td")[3];
+
+            if (tdName) {  // if (tdName && tdEmail && tdStatus)
                 name = tdName.textContent || tdName.innerText;
                 email = tdEmail.textContent || tdEmail.innerText;
-
-                if (name.toUpperCase().indexOf(filter) > -1 || email.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-
-    usersFilter(event) {
-        let filter, table, tr, tdStatus, tdStatusStr, i;
-        filter = event.target.value;
-        table = document.getElementById("users-table");
-        tr = table.getElementsByTagName("tr");
-
-        for (i = 0; i < tr.length; i++) {
-            tdStatus = tr[i].getElementsByTagName("td")[3];
-            if (tdStatus) {
                 tdStatusStr = tdStatus.textContent || tdStatus.innerText;
-                if (!filter.localeCompare("all") || !tdStatusStr.toLowerCase().localeCompare(filter)) {
+                console.log(filter)
+                if ((name.toUpperCase().indexOf(keyword) > -1 || email.toUpperCase().indexOf(keyword) > -1) &&
+                    (!filter.localeCompare("") || !filter.localeCompare("all") || !tdStatusStr.toLowerCase().localeCompare(filter))) {
                     tr[i].style.display = "";
                 } else {
                     tr[i].style.display = "none";
@@ -57,10 +43,10 @@ class Settings extends Component {
                 <h3>Registered Users</h3>
 
                 <div>
-                    Search: <input type="text" id="search" onKeyUp={this.usersSearch} placeholder="Name or Email" />
+                    Search: <input type="text" id="search" onKeyUp={this.usersSearchFilter} placeholder="Name or Email" />
                 </div>
 
-                <div onChange={this.usersFilter}>
+                <div onChange={this.usersSearchFilter}>
                     Filter by Status:
                     <input type="radio" id="all" name="filter" value="all" />
                     <label htmlFor="all">All</label>
@@ -112,6 +98,17 @@ class Settings extends Component {
             </div>
         );
     }
+}
+
+function getRadioValue(groupName)
+{
+    let elements = document.getElementsByName(groupName);
+    for (let i = 0; i < elements.length; i++) {
+        if (elements[i].checked) {
+            return elements[i].value;
+        }
+    }
+    return "";
 }
 
 export default Settings;
