@@ -5,8 +5,38 @@ https://www.w3schools.com/howto/howto_js_filter_table.asp
 
 import React, { Component } from "react";
 import "./Settings.css";
+import axios from "axios";
 
 class Settings extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: null,
+            data: null
+        };
+    }
+
+    getData() {
+        axios({
+            method: "GET",
+            url:"/test",
+        }).then((response) => {
+            const res = response.data
+            console.log(res)
+            document.getElementById("test").style.display = ""
+            document.getElementById("response").innerHTML = res.name
+            this.setState({
+                name: res.name,
+                data: res.data})
+        }).catch((error) => {
+            if (error.response) {
+                console.log(error.response)
+                console.log(error.response.status)
+                console.log(error.response.headers)
+            }
+        })
+    }
 
     usersSearchFilter(event) {
         let input, keyword, filter, table, tr, tdName, tdEmail, tdStatus, i, name, email, tdStatusStr;
@@ -95,6 +125,14 @@ class Settings extends Component {
                         <td>Active</td>
                     </tr>
                 </table>
+
+                <br />
+                <button onClick={this.getData}>Click me</button>
+                <div id="test" style={{display:"none"}}>
+                    <p>Test details: </p>
+                    <p id="response"></p>
+                </div>
+
             </div>
         );
     }
