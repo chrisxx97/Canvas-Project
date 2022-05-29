@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
     course_id INTEGER PRIMARY KEY, 
 	title varchar(100) NOT NULL, 
-	instructor_id INTEGER NOT NULL, 
+	instructor_id INTEGER, 
 	capacity INTEGER NOT NULL, 
 	description varchar(1000), 
 	check(capacity > 0), 

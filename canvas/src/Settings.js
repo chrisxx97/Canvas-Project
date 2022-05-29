@@ -5,38 +5,52 @@ https://www.w3schools.com/howto/howto_js_filter_table.asp
 
 import React, { Component } from "react";
 import "./Settings.css";
-import axios from "axios";
 
 class Settings extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: null,
-            data: null
-        };
-    }
+    getUsers() {
+        let request = new XMLHttpRequest()
+        request.open("GET", "/users")
 
-    getData() {
-        axios({
-            method: "GET",
-            url:"/test",
-        }).then((response) => {
-            const res = response.data
-            console.log(res)
-            document.getElementById("test").style.display = ""
-            document.getElementById("response").innerHTML = res.name
-            this.setState({
-                name: res.name,
-                data: res.data})
-        }).catch((error) => {
-            if (error.response) {
-                console.log(error.response)
-                console.log(error.response.status)
-                console.log(error.response.headers)
+        request.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                let table = document.getElementById("users-table")
+                let data = JSON.parse(this.response).users
+                for (let i = 0; i < data.length; i++) {
+                    let row = table.insertRow()
+                    row.insertCell().innerHTML = data[i][3]
+                    row.insertCell().innerHTML = data[i][4]
+                    row.insertCell().innerHTML = data[i][6]
+                    row.insertCell().innerHTML = data[i][5]
+                    let cell = row.insertCell()
+                    cell.innerHTML = "<button class='change-status'>Activate/Deactivate</button>"
+                }
             }
-        })
+        }
+
+        request.send()
     }
+/*
+    statusButtons() {
+        let buttons
+
+            buttons = document.getElementsByClassName('change-status')
+
+
+        console.log(buttons.length)
+        for (let i = 0; i < Object.keys(buttons).length; i++) {
+            console.log(buttons[i])
+        }
+
+
+
+        let buttons = document.getElementsByClassName('change-status')
+        for (let i = 0; i < Object.keys(buttons).length; i++) {
+            console.log(buttons[i])
+            buttons[i].onclick = 'changeStatus'
+        }
+
+    }*/
 
     usersSearchFilter(event) {
         let input, keyword, filter, table, tr, tdName, tdEmail, tdStatus, i, name, email, tdStatusStr;
@@ -67,6 +81,8 @@ class Settings extends Component {
     }
 
     render() {
+        this.getUsers()
+//        this.statusButtons()
         return (
             <div>
                 <h2>Settings</h2>
@@ -93,36 +109,7 @@ class Settings extends Component {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Status</th>
-                    </tr>
-                    <tr>
-                        <td>user1</td>
-                        <td>user11@uchicago.edu</td>
-                        <td>Student</td>
-                        <td>Active</td>
-                    </tr>
-                    <tr>
-                        <td>user2</td>
-                        <td>user211@uchicago.edu</td>
-                        <td>Student</td>
-                        <td>Active</td>
-                    </tr>
-                    <tr>
-                        <td>user112</td>
-                        <td>user2@uchicago.edu</td>
-                        <td>Teacher</td>
-                        <td>Active</td>
-                    </tr>
-                    <tr>
-                        <td>user3</td>
-                        <td>user3@uchicago.edu</td>
-                        <td>Student</td>
-                        <td>Inactive</td>
-                    </tr>
-                    <tr>
-                        <td>user4</td>
-                        <td>user41@uchicago.edu</td>
-                        <td>Teacher</td>
-                        <td>Active</td>
+                        <th>Change Status</th>
                     </tr>
                 </table>
 
@@ -132,7 +119,7 @@ class Settings extends Component {
                     <p>Test details: </p>
                     <p id="response"></p>
                 </div>
-
+                <button onClick={changeStatus}>Activate/Deactivate</button>
             </div>
         );
     }
@@ -147,6 +134,10 @@ function getRadioValue(groupName)
         }
     }
     return "";
+}
+
+function changeStatus() {
+    console.log(1)
 }
 
 export default Settings;
