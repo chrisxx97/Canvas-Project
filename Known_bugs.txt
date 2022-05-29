@@ -2,8 +2,9 @@
 2. How to set the position of the next component
 
 
-storage on client side: cookies, local storage, 
-apply css on components
+Notes:
+  storage on client side: cookies, local storage, 
+  apply css on components
 
 
 Questions:
@@ -11,16 +12,6 @@ Questions:
 2. Do we need a new component for each of student, teacher, admin? Since they have different functionalities?
 3. Use flask in python, simple apis
 
-4. class EssayForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'Please write an essay about your favorite DOM element.'
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
 
 Additional packages:
@@ -29,3 +20,6 @@ Additional packages:
 
 Bugs:
 1. Clicking on course icon refreshes the page
+
+How to run backend:
+  npm run start-backend

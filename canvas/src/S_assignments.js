@@ -1,14 +1,25 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import "./Courses.css";
-import ReactTable from "react-table";
+
 
 class S_assignments extends Component {
-    render() {
+
+    // getTable(){
+    //     let request = new XMLHttpRequest()
+    //     request.open("GET", "/users")
+    //     request.onreadystatechange = function(){
+    //         if (this.readyState === 4 && this.status===2000){
+    //             let table = document.getElementById("s_assignments_table")
+    //             let data = JSON.parse(this.response).
+    //         }
+    //     }
+    // }
+    render() { 
             return (
                 <div class = "flex-child">
                     <div class = "styled-table">
-                        <table>
+                        <table id = "s_assignments_table">
                             <thead>
                                 <tr>
                                     <th>Assignment ID</th>
@@ -34,7 +45,7 @@ class S_assignments extends Component {
                             </tbody>
                             
                         </table>
-                    </div>
+                    </div> 
                 </div>
                 
             
