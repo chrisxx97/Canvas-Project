@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./login.css";
+import ForgotPw from './ForgorPw';
 
 class Login extends Component {
 	// list of functions
@@ -15,12 +16,14 @@ class Login extends Component {
 				<form name="myform" action="/action_page.php">
 					<input type="text" id="cnetid" name="cnetid" placeholder="CNetID / UCMEDID"><br>
 					<input type="text" id="pw" name="pw" placeholder="Password"><br><br>
-					<a href="file:///Users/apple/Desktop/Web%20Project/forgotpw.html">Forgot your password?</a><br>
-					<a href="file:///Users/apple/Desktop/Web%20Project/signup.html">Sign up</a><br></br>
+					<NavLink to="/ForgotPw"><div>Forgot your password?</div></NavLink><br>
 					<button type="submit">LOG IN</button>
 				</form>
 				<br>
-				<p>You should login to click on other buttons.</p> 
+				<p>You should first login or register to click on other buttons.</p> 
+        <Routes>
+          <Route path = "/ForgotPw" element = {<ForgorPw />}/>
+        </Routes>
 			</div>
 		)
 	}
