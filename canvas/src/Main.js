@@ -10,6 +10,8 @@ import Account from "./Account";
 import Courses from "./Courses";
 import Settings from "./Settings";
 import Logout from "./Logout";
+import Login from "./Login";
+import SignUp from "./SignUp";
 
 class Main extends Component {
     render() {
