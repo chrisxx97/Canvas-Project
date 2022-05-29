@@ -30,27 +30,39 @@ class Settings extends Component {
 
         request.send()
     }
-/*
+
     statusButtons() {
-        let buttons
+        setTimeout(() => {
+            let buttons = document.getElementsByClassName('change-status')
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = () => this.changeStatus(i + 1)
+            }
+        }, 300)
+    }
 
-            buttons = document.getElementsByClassName('change-status')
-
-
-        console.log(buttons.length)
-        for (let i = 0; i < Object.keys(buttons).length; i++) {
-            console.log(buttons[i])
+    changeStatus(idx) {
+        let that = this
+        let table = document.getElementById("users-table")
+        let email = table.rows[idx].cells[1].innerHTML
+        let status = table.rows[idx].cells[3].innerHTML
+        let newStatus = "inactive"
+        if (!status.localeCompare("inactive")) {
+            newStatus = "active"
         }
 
-
-
-        let buttons = document.getElementsByClassName('change-status')
-        for (let i = 0; i < Object.keys(buttons).length; i++) {
-            console.log(buttons[i])
-            buttons[i].onclick = 'changeStatus'
+        let request = new XMLHttpRequest()
+        request.open("POST", "/settings")
+        request.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                that.updateUsers(idx, newStatus)
+            }
         }
+        request.send(JSON.stringify({ "email": email, "newStatus": newStatus }))
+    }
 
-    }*/
+    updateUsers(idx, newStatus) {
+        document.getElementById("users-table").rows[idx].cells[3].innerHTML = newStatus
+    }
 
     usersSearchFilter(event) {
         let input, keyword, filter, table, tr, tdName, tdEmail, tdStatus, i, name, email, tdStatusStr;
@@ -82,7 +94,7 @@ class Settings extends Component {
 
     render() {
         this.getUsers()
-//        this.statusButtons()
+        this.statusButtons()
         return (
             <div>
                 <h2>Settings</h2>
@@ -119,7 +131,7 @@ class Settings extends Component {
                     <p>Test details: </p>
                     <p id="response"></p>
                 </div>
-                <button onClick={changeStatus}>Activate/Deactivate</button>
+
             </div>
         );
     }
@@ -134,10 +146,6 @@ function getRadioValue(groupName)
         }
     }
     return "";
-}
-
-function changeStatus() {
-    console.log(1)
 }
 
 export default Settings;

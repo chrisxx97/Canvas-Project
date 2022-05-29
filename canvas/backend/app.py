@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 import sqlite3, json, time
 from datetime import datetime
@@ -35,9 +35,14 @@ def get_users():
     }
     return json.dumps(response_body)
 
-@app.route('/users/status')
+@app.route('/settings', methods=['POST'])
 def change_status():
-    return
+    req = json.loads(request.data)
+    newStatus = req['newStatus']
+    email = req['email']
+    cursor.execute("UPDATE users SET status = '{0}' WHERE email = '{1}';".format(newStatus, email))
+    connect.commit()
+    return {}
 
 @app.route('/<user_id>')
 def dashboard(user_id):
