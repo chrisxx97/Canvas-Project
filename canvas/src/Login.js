@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./login.css";
-import ForgotPw from './ForgorPw';
+import AnswerSq from "./AnswerSq";
 
 class Login extends Component {
 	// list of functions
@@ -10,21 +10,23 @@ class Login extends Component {
 		return (
 			<div>
 				<h1>The University of Chicago</h1>
-				<br>
+				<br />
 				<h4>Log in to Your UChicago Account</h4>
-				<br>
+				<br />
 				<form name="myform" action="/action_page.php">
-					<input type="text" id="cnetid" name="cnetid" placeholder="CNetID / UCMEDID"><br>
-					<input type="text" id="pw" name="pw" placeholder="Password"><br><br>
-					<NavLink to="/ForgotPw"><div>Forgot your password?</div></NavLink><br>
+					<input type="text" id="cnetid" name="cnetid" placeholder="CNetID / UCMEDID" /><br />
+					<input type="text" id="pw" name="pw" placeholder="Password" /><br /><br />
+					<NavLink to="/AnswerSq"><div>Forgot your password?</div></NavLink><br />
 					<button type="submit">LOG IN</button>
 				</form>
-				<br>
+				<br />
 				<p>You should first login or register to click on other buttons.</p> 
         <Routes>
-          <Route path = "/ForgotPw" element = {<ForgorPw />}/>
+          <Route path = "/AnswerSq" element = {<AnswerSq />}/>
         </Routes>
 			</div>
 		)
 	}
 }
+
+export default Login;
