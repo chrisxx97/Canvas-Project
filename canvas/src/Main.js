@@ -51,15 +51,11 @@ class Main extends Component {
                             <NavLink to="logout">
                                 <div>Logout</div>
                             </NavLink>
-                        </li>
-                        
-                        </li>
+                        </li>                
                         <li className="menu-item">
                             <NavLink to="login">
                                 <div>Login</div>
                             </NavLink>
-                        </li>
-
                         </li>
                         <li className="menu-item">
                             <NavLink to="signup">
