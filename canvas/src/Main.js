@@ -50,6 +50,21 @@ class Main extends Component {
                                 <div>Logout</div>
                             </NavLink>
                         </li>
+                        
+                        </li>
+                        <li className="menu-item">
+                            <NavLink to="login">
+                                <div>Login</div>
+                            </NavLink>
+                        </li>
+
+                        </li>
+                        <li className="menu-item">
+                            <NavLink to="signup">
+                                <div>SignUp</div>
+                            </NavLink>
+                        </li>
+
                     </ul>
 
                     <div className="content">
@@ -59,6 +74,8 @@ class Main extends Component {
                             <Route path="/courses" element={<Courses />}/>
                             <Route path="/settings" element={<Settings />}/>
                             <Route path="/logout" element={<Logout />}/>
+                            <Route path="/login" element={<Login />}/>
+                            <Route path="/signup" element={<SignUp />}/>
                         </Routes>
                     </div>
                 </div>
