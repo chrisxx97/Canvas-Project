@@ -47,13 +47,12 @@ class Main extends Component {
                                 <div>Dashboard</div>
                             </NavLink>
                         </li>
-                        <li className="menu-item"  >
-                           
-                        <NavLink to="/courses_menu" onClick = {openCourseBar} >
-                            <img className = "menu-icon" alt = "" src="course.png"/>
-                            <div >Courses</div>
-                        </NavLink>
-                            
+                        
+                        <li className="menu-item"  > 
+                            <NavLink to="/courses_menu"  onClick = {openCourseBar}>
+                                <img className = "menu-icon" alt = "" src="course.png"/>
+                                <div >Courses</div>
+                            </NavLink>  
                         </li>
                         <li className="menu-item">
                             <NavLink to="/settings">

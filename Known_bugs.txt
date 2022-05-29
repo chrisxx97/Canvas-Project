@@ -1,10 +1,31 @@
-1. When you are on course_menu page, you cannot click on "course" again to bring up the course menu to select another course. 
-You have you go to any other page, and then click on "course" again to select a new course.
+1. Clicking Course refreshes the page
+2. How to set the position of the next component
 
 
+storage on client side: cookies, local storage, 
+apply css on components
 
 
 Questions:
 1. How do we pass student info from component to another
 2. Do we need a new component for each of student, teacher, admin? Since they have different functionalities?
-3. Use flask in python, simple apis, 
+3. Use flask in python, simple apis
+
+4. class EssayForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 'Please write an essay about your favorite DOM element.'
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+
+Additional packages:
+  npm install react-table
+
+
+Bugs:
+1. Clicking on course icon refreshes the page

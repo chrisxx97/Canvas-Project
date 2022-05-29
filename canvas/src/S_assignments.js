@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import "./Courses.css";
+import ReactTable from "react-table";
 
-class S_announcements extends Component {
+class S_assignments extends Component {
     render() {
             return (
                 <div class = "flex-child">
@@ -9,19 +11,25 @@ class S_announcements extends Component {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Announcements</th>
-                                    <th>Date Posted</th>
+                                    <th>Assignment ID</th>
+                                    <th>Description</th>
+                                    <th>Due Date</th>
+                                    <th>Your Submission</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Hello Class! </td>
+                                    <td>1 </td>
+                                    <td>Assignment 1</td>
                                     <td>5/15/2022</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                    <td>The first assignment is due next week. </td>
+                                    <td>2</td>
+                                    <td>Assignment 2 </td>
                                     <td>5/15/2022</td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                             
@@ -36,4 +44,4 @@ class S_announcements extends Component {
     }
 }
 
-export default S_announcements;
+export default S_assignments;
