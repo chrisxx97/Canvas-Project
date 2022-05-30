@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import {
+    Route,
+    Routes,
+    NavLink,
+    BrowserRouter
+} from "react-router-dom";
 import "./login.css";
 import AnswerSq from "./AnswerSq";
 
 class Login extends Component {
 	// list of functions
-
+	
 	render() {
 
 		return (
