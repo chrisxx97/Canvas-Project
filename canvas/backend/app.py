@@ -89,3 +89,17 @@ def dashboard(user_id):
         "past": past
     }
     return json.dumps(response_body)
+
+@app.route('/login', methods=['GET','POST'])
+def validate_login():
+    req = json.loads(request.data)
+    username = req['username']
+    password = req['pwd']
+    sql = "SELECT password from users WHERE username = '"+username+"';"
+    print(sql)
+    matching_password = cursor.execute(sql).fetchone()[0]
+    print(matching_password)
+    response_body = {
+        "success": password == matching_password
+    }
+    return json.dumps(response_body)

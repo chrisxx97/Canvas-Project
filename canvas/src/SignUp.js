@@ -18,11 +18,12 @@ class SignUp extends Component {
 						<input type="text" id="s_id" name="s_id" placeholder="ID (must be a number)" /><br />
 						<input type="text" id="pw" name="pw" placeholder="Password (5 chars in length, at least 1 number and 1 symbol)" /><br />
 						<input type="text" id="confirm_pw" name="confirm_pw" placeholder="Confirm your password" /><br />
-						<input type="text" id="sq1" name="sq1" placeholder="Your first security question" /><br />
+						<p id="sq1" name="sq1">What is your favorite movie?</p><br />
 						<input type="text" id="sa1" name="sa1" placeholder="Your first answer" /><br />
-						<input type="text" id="sq2" name="sq2" placeholder="Your second security question" /><br />
+						
+						<p id="sq2" name="sq2">What is your father's middle name?</p><br />
 						<input type="text" id="sa2" name="sa2" placeholder="Your second answer" /><br />
-						<input type="text" id="sq3" name="sq3" placeholder="Your third security question" /><br />
+						<p id="sq3" name="sq3">What is the make of your first car?</p><br />
 						<input type="text" id="sa3" name="sa3" placeholder="Your third answer" /><br /><br />
 						<label for="student">student</label>
 						<input type="radio" id="student" name="account_type" value="student" />
