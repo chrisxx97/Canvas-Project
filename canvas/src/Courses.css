@@ -73,7 +73,8 @@
     margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
-    min-width: 200px;
+    max-width: 1200px;
+    table-layout: fixed;
     /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
 }
 
@@ -110,3 +111,7 @@ textarea {
 }
 
 
+button {
+  text-align: center;
+  margin: auto;
+}

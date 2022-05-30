@@ -16,7 +16,7 @@ Questions:
 
 Additional packages:
   npm install react-table
-
+  npm install focus-trap-react
 
 Bugs:
 1. Clicking on course icon refreshes the page

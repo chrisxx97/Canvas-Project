@@ -27,6 +27,47 @@ def my_profile():
     }
     return json.dumps(response_body)
 
+@app.route('/s_assignments')
+def s_assignments():
+    assignments = cursor.execute("SELECT assignments.assignment_id, description, due_date, answer FROM student_assignment inner join assignments on student_assignment.assignment_id = assignments.assignment_id").fetchall()
+    response_body = {
+        "data":assignments
+    }
+    return json.dumps(response_body)
+
+@app.route('/t_assignments')
+def t_assignments():
+    assignments = cursor.execute("SELECT assignment_id, description, due_date from assignments").fetchall()
+    response_body = {
+        "data":assignments
+    }
+    return json.dumps(response_body)
+
+@app.route('/s_ann')
+def s_ann():
+    ann = cursor.execute("SELECT * from announcements").fetchall()
+    response_body = {
+        "data":ann
+    }
+    return json.dumps(response_body)
+
+@app.route('/s_grade')
+def s_grade():
+    ann = cursor.execute("SELECT assignments.assignment_id, description, points, grade from student_assignment natural join assignments").fetchall()
+    response_body = {
+        "data":ann
+    }
+    return json.dumps(response_body)
+
+@app.route('/t_grade')
+def t_grade():
+    ann = cursor.execute("SELECT s_assignment_id, user_id, assignments.assignment_id, description, points, grade from student_assignment natural join assignments").fetchall()
+    response_body = {
+        "data":ann
+    }
+    return json.dumps(response_body)
+
+
 @app.route('/users')
 def get_users():
     users = cursor.execute("SELECT * FROM users;").fetchall()
@@ -43,6 +84,16 @@ def change_status():
     cursor.execute("UPDATE users SET status = '{0}' WHERE email = '{1}';".format(newStatus, email))
     connect.commit()
     return {}
+
+@app.route('/new_submission', methods=['POST'])
+def new_submission():
+    req = json.loads(request.data)
+    assignment_id = req['assignment_id']
+    user_id = req['user_id']
+    cursor.execute("UPDATE student_assignment SET status = '{0}' WHERE email = '{1}';".format(newStatus, email))
+    connect.commit()
+    return {}
+
 
 @app.route('/<user_id>')
 def dashboard(user_id):

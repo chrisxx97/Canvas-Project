@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import "./Courses.css";
 
 
-class T_announcements extends Component {
+class T_assignments extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -41,18 +40,16 @@ class T_announcements extends Component {
     getTable(){
         let request = new XMLHttpRequest()
         
-        request.open("GET", "/s_ann")
+        request.open("GET", "/t_assignments")
         request.onreadystatechange = function(){
             if (this.readyState === 4 && this.status===200){
-                let table = document.getElementById("s_ann_table")
+                let table = document.getElementById("t_ass_table")
                 let data = JSON.parse(this.response).data
                 for (let i = 0; i < data.length; i++) {
                     let row = table.insertRow()
                     row.insertCell().innerHTML = data[i][0]
-                    row.insertCell().innerHTML = data[i][2]
-                    row.insertCell().innerHTML = data[i][3]
-                    row.insertCell().innerHTML = data[i][4]
-                    
+                    row.insertCell().innerHTML = data[i][1]
+                    row.insertCell().innerHTML = data[i][2]                    
                 }
             }
         }
@@ -66,19 +63,17 @@ class T_announcements extends Component {
                     <table class = "styled-table">
                         <thead>
                             <tr>
-                                <th>Announcement ID</th>
-                                    <th>Date Posted</th>
-                                    <th>Title</th>
-                                    <th>Details</th>
-
+                                <th>Assignment ID</th>
+                                <th>Description</th>
+                                <th>Due Date</th>
                             </tr>
                         </thead>
-                        <tbody id = "s_ann_table">
+                        <tbody id = "t_ass_table">
 
                         </tbody>
                         
                     </table><br/>
-                    <h2>New Announcement:</h2>
+                    <h2>New Assignment:</h2>
                     <form onSubmit={this.handleSubmit}>
                         <label>
                         <textarea  value = {this.state.value} onChange={this.handleChange} />
@@ -96,4 +91,4 @@ class T_announcements extends Component {
     }
 }
 
-export default T_announcements;
+export default T_assignments;

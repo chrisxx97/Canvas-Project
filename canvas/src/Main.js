@@ -22,7 +22,24 @@ class Main extends Component {
     // }
 
     //  [nameState, setNameState] = useState("");
+
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         role: "student",
+    //         user_id: 1
+    //     };
+    // }
+    // handle = ()=> {
+    //     localStorage.setItem("user_id", "1")
+
+    // }
+    
+
     render() {
+        localStorage.setItem("user_id", 1)
+        
+        // this.handle()
         return (
             
             
@@ -68,7 +85,7 @@ class Main extends Component {
 
                     <div className="content">
                         <Routes>
-                            <Route exact path="/" element={<Dashboard />}/>
+                            <Route exact path="/*" element={<Dashboard />}/>
                             <Route path="/account" element={<Account />}/>
                             <Route path="/courses_menu/*" element={<Courses_menu />}/>
                             <Route path="/settings" element={<Settings />}/>
