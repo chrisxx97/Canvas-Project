@@ -37,7 +37,7 @@ class Settings extends Component {
             for (let i = 0; i < buttons.length; i++) {
                 buttons[i].onclick = () => this.changeStatus(i + 1)
             }
-        }, 300)
+        }, 800)
     }
 
     changeStatus(idx) {
