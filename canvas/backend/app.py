@@ -163,6 +163,12 @@ def validate_sq():
 
     return json.dumps(response_body)
 
+
+
+    # @app.route('/account/<user_name>', methods=['GET'])
+    # def get_account_info(user_name):
+    #     data = cursor.execute("SELECT * from users where")
+
 @app.route('/enrollment', methods=['POST'])
 def enroll():
     req = json.loads(request.data)

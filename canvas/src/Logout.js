@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
 import Login from "./Login";
 
  export default function Logout() {
@@ -9,12 +8,7 @@ import Login from "./Login";
     //auto redirect to login page
     return (
         <>
-        <NavLink to="/login"><div>Back to Login Page</div></NavLink><br />
-        <Routes>
-            <Route>
-            <Route exact path="/login" element={<Login />} />
-            </Route>
-        </Routes>
+        <a href="/login">Click to log out and back to login page!</a>
         </>       
     );
 };

@@ -68,7 +68,7 @@ class Main extends Component {
                                     <Route path="/courses" element={<Courses />} />
                                     <Route path="/settings" element={<Settings />} />
                                     {/* <Route path="/logout/*" element={<Logout />} /> */}
-                                    <Route exact path="*" element={<Logout />} />
+                                    <Route exact path="/logout" element={<Logout />} />
                                 </Routes>
                             </div>
                         </div>
