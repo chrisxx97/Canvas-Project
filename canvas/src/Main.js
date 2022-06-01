@@ -24,7 +24,7 @@ class Main extends Component {
                 <>
                     <BrowserRouter>
                         <div>
-                            <ul id="side-menu"></ul>
+                            <ul id="side-menu">
                             <li id="logo">
                                 <NavLink id="logo-a" to="/">
                                     <img id="logo-img" src="assets/UChicago_Shield_2Color_Maroon_WhiteBorder_RGB.png"
@@ -58,6 +58,7 @@ class Main extends Component {
                                     <div>Logout</div>
                                 </NavLink>
                             </li>
+                            </ul>
                             
                             <div className="content">
                                 <Routes>
