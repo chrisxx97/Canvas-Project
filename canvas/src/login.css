@@ -1,17 +1,13 @@
-body {
+/* #login_page {
 	background-color: darkred;
 	text-align: center;
 }
-h1, h4 {
+#login {
 	color: white;
 	text-align: center;
 }
-p {
-	color: white;
-	text-align: center;
-}
-input[type=text] {
+#username, #pwd {
 	width: 30%;
 	padding: 12px 20px;
 	margin: 8px 0;
-}
+} */

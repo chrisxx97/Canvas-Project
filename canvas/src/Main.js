@@ -12,6 +12,7 @@ import Settings from "./Settings";
 import Logout from "./Logout";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import AnswerSq from "./AnswerSq";
 
 class Main extends Component {
     render() {
@@ -91,12 +92,10 @@ class Main extends Component {
                         <div className="content">
                             <Routes>
                                 <Route exact path="/" element={<Login />} />
-                                <Route path="/account" element={<Account />} />
-                                <Route path="/courses" element={<Courses />} />
-                                <Route path="/settings" element={<Settings />} />
                                 <Route path="/logout" element={<Logout />} />
                                 <Route path="/login/*" element={<Login />} />
                                 <Route path="/signup" element={<SignUp />} />
+                                <Route path="/AnswerSq" element={<AnswerSq />} />
                             </Routes>
                         </div>
                     </div>

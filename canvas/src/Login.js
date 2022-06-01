@@ -1,8 +1,9 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import {
     Route,
     Routes,
     NavLink,
+	Link,
     BrowserRouter
 } from "react-router-dom";
 //import "./login.css";
@@ -34,25 +35,23 @@ export default function Login() {
 
 
 	return (
-		<div>
-			<h1>The University of Chicago</h1>
+		<div id="login_page">
+			<h1 id="login">The University of Chicago</h1>
 			<br />
-			<h4>Log in to Your UChicago Account</h4>
+			<h4 id="login">Log in to Your UChicago Account</h4>
 			<br />
-			<form name="myform">
-				<input type="text" id="username" name="username" placeholder="Username" 
+			<form name="myform" >
+				<input type="text" id="username" name="username" placeholder="name" 
 				onChange={(e) => setUsername(e.target.value)} /><br />
 				<input type="text" id="pwd" name="pwd" placeholder="Password" 
 				onChange={(e) => setPwd(e.target.value)}/><br /><br />
-				<NavLink to="/login/AnswerSq"><div>Forgot your password?</div></NavLink><br />
+				<NavLink to="AnswerSq"><div>Forgot your password?</div></NavLink><br />
 				<button type="button" onClick={submitForm}>LOG IN</button>
 			</form>
 			<br />
-			<p>You should first login or register to click on other buttons.</p> 
-	<Routes>
-		<Route path = "/AnswerSq" element = {<AnswerSq />}/>
-	</Routes>
 		</div>
 	);
 	
 }
+
+
