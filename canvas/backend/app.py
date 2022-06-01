@@ -27,11 +27,13 @@ def my_profile():
     }
     return json.dumps(response_body)
 
-@app.route('/users')
-def get_users():
-    users = cursor.execute("SELECT * FROM users;").fetchall()
+@app.route('/users_courses')
+def get_users_courses():
+    users = cursor.execute("SELECT * FROM users WHERE role != 'admin';").fetchall()
+    courses = cursor.execute("SELECT * FROM courses;").fetchall()
     response_body = {
-        "users": users
+        "users": users,
+        "courses": courses
     }
     return json.dumps(response_body)
 
@@ -46,8 +48,10 @@ def change_status():
 
 @app.route('/<user_id>')
 def dashboard(user_id):
+    if user_id == "favicon.ico":
+        return {}
+
     activeStudents = cursor.execute("SELECT * FROM users WHERE status = 'active' AND role = 'student';").fetchall()
-    activeTeachers = cursor.execute("SELECT * FROM users WHERE status = 'active' AND role = 'teacher';").fetchall()
     activeTeachers = cursor.execute("SELECT * FROM users WHERE status = 'active' AND role = 'teacher';").fetchall()
     courses = cursor.execute("SELECT * FROM courses;").fetchall()
 
@@ -87,5 +91,42 @@ def dashboard(user_id):
         "todo": todo,
         "upcoming": upcoming,
         "past": past
+    }
+    return json.dumps(response_body)
+
+@app.route('/enrollment', methods=['POST'])
+def enroll():
+    req = json.loads(request.data)
+    user_id = req['user_id']
+    course_to_add = req['course_to_add']
+
+    user = cursor.execute("SELECT * FROM users WHERE user_id = {0};".format(user_id)).fetchall()[0]
+    role = user[6]
+    course = cursor.execute("SELECT * FROM courses WHERE course_id = {0};".format(course_to_add)).fetchall()[0]
+    if role == "teacher":
+        if course[2] != None:
+            msg = course[1] + " already has an instructor"
+        else:
+            cursor.execute("UPDATE courses SET instructor_id = {0} WHERE course_id = {1};".format(user_id, course_to_add))
+            connect.commit()
+            msg = user[3] + " is now the instructor of " + course[1]
+    else:
+        enrollment = cursor.execute("SELECT * FROM enrollments WHERE user_id = {0} AND course_id = {1};".format(user_id, course_to_add)).fetchall()
+        if len(enrollment) > 0:
+            msg = user[3] + " is already enrolled in " + course[1]
+        else:
+            numOfEnrollments = len(cursor.execute("SELECT * FROM enrollments;").fetchall())
+            numOfStudentAssignment = len(cursor.execute("SELECT * FROM student_assignment;").fetchall())
+            cursor.execute("INSERT INTO enrollments VALUES ({0}, {1}, {2});".format(numOfEnrollments+1, user_id, course_to_add))
+            connect.commit()
+            assignments = cursor.execute("SELECT * FROM assignments WHERE course_id = {0};".format(course_to_add)).fetchall()
+            for a in assignments:
+                numOfStudentAssignment += 1
+                cursor.execute("INSERT INTO student_assignment VALUES ({0}, {1}, {2}, NULL, NULL);".format(numOfStudentAssignment, user_id, a[0]))
+                connect.commit()
+            msg = user[3] + " is now enrolled in " + course[1]
+
+    response_body = {
+        "message": msg
     }
     return json.dumps(response_body)
