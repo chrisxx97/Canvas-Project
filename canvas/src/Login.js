@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import {
-    Route,
-    Routes,
     NavLink,
-	Link,
-    BrowserRouter
+	Link
 } from "react-router-dom";
 //import "./login.css";
 import AnswerSq from "./AnswerSq";
@@ -53,5 +50,4 @@ export default function Login() {
 	);
 	
 }
-
 

@@ -14,8 +14,10 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import AnswerSq from "./AnswerSq";
 
+
 class Main extends Component {
     render() {
+        console.log(window.sessionStorage.getItem('login'))
         if (window.sessionStorage.getItem('login')) {
             //logged in
             return (
@@ -56,14 +58,16 @@ class Main extends Component {
                                     <div>Logout</div>
                                 </NavLink>
                             </li>
-
+                            
                             <div className="content">
                                 <Routes>
                                     <Route exact path="/" element={<Dashboard />} />
+                                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                                     <Route path="/account" element={<Account />} />
                                     <Route path="/courses" element={<Courses />} />
                                     <Route path="/settings" element={<Settings />} />
-                                    <Route path="/logout" element={<Logout />} />
+                                    {/* <Route path="/logout/*" element={<Logout />} /> */}
+                                    <Route exact path="*" element={<Logout />} />
                                 </Routes>
                             </div>
                         </div>
@@ -93,7 +97,7 @@ class Main extends Component {
                             <Routes>
                                 <Route exact path="/" element={<Login />} />
                                 <Route path="/logout" element={<Logout />} />
-                                <Route path="/login/*" element={<Login />} />
+                                <Route path="/login" element={<Login />} />
                                 <Route path="/signup" element={<SignUp />} />
                                 <Route path="/AnswerSq" element={<AnswerSq />} />
                             </Routes>
