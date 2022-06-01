@@ -21,6 +21,7 @@ export default function Login() {
 				if(response.data['success']){
 					window.sessionStorage.setItem('login', true)
 					window.location.reload(false)
+					window.sessionStorage.setItem('user_name', username)
 				}else{
 					alert('login fails')
 
