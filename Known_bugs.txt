@@ -17,6 +17,7 @@ Questions:
 Additional packages:
   npm install react-table
   npm install focus-trap-react
+  npm install antd
 
 Bugs:
 1. Clicking on course icon refreshes the page

@@ -85,12 +85,14 @@ def change_status():
     connect.commit()
     return {}
 
-@app.route('/new_submission', methods=['POST'])
-def new_submission():
+
+@app.route('/new_ann', methods=['POST'])
+def new_ann():
     req = json.loads(request.data)
-    assignment_id = req['assignment_id']
-    user_id = req['user_id']
-    cursor.execute("UPDATE student_assignment SET status = '{0}' WHERE email = '{1}';".format(newStatus, email))
+    now = datetime.now() # current date and time
+    date_time = now.strftime("%m/%d/%Y")
+    content = req['content']
+    cursor.execute(f"INSERT INTO announcements (course_id, posted_date, content) Values (1, '{date_time}', '{content}');")
     connect.commit()
     return {}
 

@@ -1,40 +1,10 @@
 import React, { Component } from "react";
 import "./Courses.css";
+import { BrowserRouter, Link,NavLink, Route, Routes } from 'react-router-dom';
 
+import Ass_form from "./Ass_form";
 
 class T_assignments extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            value: ''
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleSubmit(event){
-        alert("A new announcement has been posted: " + this.state.value);
-        event.preventDefault();
-
-        // post new announcment to database
-        // reload the current component
-
-
-
-        this.setState({value:''});
-
-
-
-    }
-
-    addAnnouncement(){
-        let table = document.getElementById("new_ann");
-        
-    }
-
-    handleChange(event){
-        this.setState({value: event.target.value});
-    }
 
 
     getTable(){
@@ -49,7 +19,7 @@ class T_assignments extends Component {
                     let row = table.insertRow()
                     row.insertCell().innerHTML = data[i][0]
                     row.insertCell().innerHTML = data[i][1]
-                    row.insertCell().innerHTML = data[i][2]                    
+                    // row.insertCell().innerHTML = data[i][2]                    
                 }
             }
         }
@@ -65,21 +35,18 @@ class T_assignments extends Component {
                             <tr>
                                 <th>Assignment ID</th>
                                 <th>Description</th>
-                                <th>Due Date</th>
+                                
                             </tr>
                         </thead>
                         <tbody id = "t_ass_table">
 
                         </tbody>
                         
-                    </table><br/>
-                    <h2>New Assignment:</h2>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                        <textarea  value = {this.state.value} onChange={this.handleChange} />
-                        </label><br/>
-                        <input type="submit" value="Post" />
-                    </form>
+                    </table>
+                    <NavLink to = "Ass_form">Create a New Assignment</NavLink>
+                    <Routes>
+                        <Route path = "/Ass_form" element = {<Ass_form />}/>
+                    </Routes>
                 </div>
 
                 

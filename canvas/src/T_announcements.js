@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link,NavLink, Route, Routes } from 'react-router-dom';
+import Ann_form from "./Ann_form";
 import "./Courses.css";
+
 
 
 class T_announcements extends Component {
@@ -9,33 +11,28 @@ class T_announcements extends Component {
         this.state = {
             value: ''
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
     }
 
-    handleSubmit(event){
-        alert("A new announcement has been posted: " + this.state.value);
-        event.preventDefault();
+    // handleSubmit(event){
+    //     alert("A new announcement has been posted: " + this.state.value);
+    //     event.preventDefault();
 
-        // post new announcment to database
-        // reload the current component
-
-
-
-        this.setState({value:''});
+    //     // post new announcment to database
+    //     // reload the current component
 
 
 
-    }
+    //     this.setState({value:''});
 
-    addAnnouncement(){
-        let table = document.getElementById("new_ann");
-        
-    }
 
-    handleChange(event){
-        this.setState({value: event.target.value});
-    }
+    // }
+
+
+    // handleChange(event){
+    //     this.setState({value: event.target.value});
+    // }
 
 
     getTable(){
@@ -50,7 +47,7 @@ class T_announcements extends Component {
                     let row = table.insertRow()
                     row.insertCell().innerHTML = data[i][0]
                     row.insertCell().innerHTML = data[i][2]
-                    row.insertCell().innerHTML = data[i][3]
+                    // row.insertCell().innerHTML = data[i][3]
                     row.insertCell().innerHTML = data[i][4]
                     
                 }
@@ -67,25 +64,22 @@ class T_announcements extends Component {
                         <thead>
                             <tr>
                                 <th>Announcement ID</th>
-                                    <th>Date Posted</th>
-                                    <th>Title</th>
-                                    <th>Details</th>
+                                <th>Date Posted</th>
+                                {/* <th>Title</th> */}
+                                <th>Announcement</th>
 
                             </tr>
                         </thead>
                         <tbody id = "s_ann_table">
-
                         </tbody>
                         
-                    </table><br/>
-                    <h2>New Announcement:</h2>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                        <textarea  value = {this.state.value} onChange={this.handleChange} />
-                        </label><br/>
-                        <input type="submit" value="Post" />
-                    </form>
+                    </table>
+                    <NavLink to = "Ann_form">Create a New Announcement</NavLink>
+                    <Routes>
+                        <Route path = "/Ann_form" element = {<Ann_form />}/>
+                    </Routes>
                 </div>
+                
 
                 
 

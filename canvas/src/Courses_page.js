@@ -7,6 +7,8 @@ import S_assignments from "./S_assignments";
 
 import S_grades from "./S_grades";
 import T_grades from "./T_grades";
+// import T_grades from "./Ann_form";
+
 
 import "./Courses.css";
 import T_assignments from "./T_assignments";
@@ -52,7 +54,7 @@ class Courses_page extends Component {
                         
                         <Routes>
                             <Route path = "/S_announcements" element = {<S_announcements />}/>
-                            <Route path = "/T_announcements" element = {<T_announcements />}/>
+                            <Route path = "/T_announcements/*" element = {<T_announcements />}/>
                             <Route path = "/S_assignments" element = {<S_assignments />}/>
                             <Route path = "/T_assignments" element = {<T_assignments/>}/>
                             <Route path = "/S_grades" element = {<S_grades />}/>
