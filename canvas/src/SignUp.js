@@ -92,7 +92,7 @@ export default function SignUp() {
 					onChange={(e) => setName(e.target.value)} /><br />
 				<input type="text" id="email" name="email" placeholder="Email (must be valid)"
 					onChange={(e) => setEmail(e.target.value)} /><br />
-				<input type="text" id="pwd" name="pwd" placeholder="Password (5 chars in length, at least 1 number and 1 symbol)"
+				<input type="text" id="pwd" name="pwd" placeholder="Password (more than 5 chars, at least 1 number and 1 symbol(!@#$%))"
 					onChange={(e) => setPwd(e.target.value)} /><br />
 				<input type="text" id="confirm_pwd" name="confirm_pwd" placeholder="Confirm your password"
 					onChange={(e) => setConfirmPwd(e.target.value)} /><br />
