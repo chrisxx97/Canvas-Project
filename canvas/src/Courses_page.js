@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
 import S_announcements from "./S_announcements";
-import T_announcements from "./T_announcements";
-import S_assignments from "./S_assignments";
+// import T_announcements from "./T_announcements";
+import T_announcements from "./T_ann";
+
+import S_assignments from "./S_ass";
 
 
 import S_grades from "./S_grades";
@@ -11,7 +13,7 @@ import T_grades from "./T_grades";
 
 
 import "./Courses.css";
-import T_assignments from "./T_assignments";
+import T_assignments from "./T_ass";
 
 class Courses_page extends Component {
     render() {
@@ -56,7 +58,7 @@ class Courses_page extends Component {
                             <Route path = "/S_announcements" element = {<S_announcements />}/>
                             <Route path = "/T_announcements/*" element = {<T_announcements />}/>
                             <Route path = "/S_assignments" element = {<S_assignments />}/>
-                            <Route path = "/T_assignments" element = {<T_assignments/>}/>
+                            <Route path = "/T_assignments/*" element = {<T_assignments/>}/>
                             <Route path = "/S_grades" element = {<S_grades />}/>
                             <Route path = "/T_grades" element = {<T_grades />}/>
 

@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sqlite3, json, time
 from datetime import datetime
@@ -29,19 +29,19 @@ def my_profile():
 
 @app.route('/s_assignments')
 def s_assignments():
-    assignments = cursor.execute("SELECT assignments.assignment_id, description, due_date, answer FROM student_assignment inner join assignments on student_assignment.assignment_id = assignments.assignment_id").fetchall()
-    response_body = {
-        "data":assignments
-    }
-    return json.dumps(response_body)
+    con = connect
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    assignments = cur.execute("SELECT assignments.assignment_id, description, due_date, answer FROM assignments left join student_assignment on student_assignment.assignment_id = assignments.assignment_id").fetchall()
+    return jsonify(assignments)
 
 @app.route('/t_assignments')
 def t_assignments():
-    assignments = cursor.execute("SELECT assignment_id, description, due_date from assignments").fetchall()
-    response_body = {
-        "data":assignments
-    }
-    return json.dumps(response_body)
+    con = connect
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    assignments = cur.execute("SELECT assignment_id, description, points, due_date from assignments").fetchall()
+    return jsonify(assignments)
 
 @app.route('/s_ann')
 def s_ann():
@@ -50,6 +50,23 @@ def s_ann():
         "data":ann
     }
     return json.dumps(response_body)
+
+
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+@app.route('/t_ann')
+def t_ann():
+    con = connect
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    ann = cur.execute("SELECT * from announcements").fetchall()
+
+    return jsonify(ann)
+
 
 @app.route('/s_grade')
 def s_grade():
@@ -85,6 +102,16 @@ def change_status():
     connect.commit()
     return {}
 
+# @app.route('/new_submission', method=['GET','POST'])
+# def new_submission():
+#     req = json.loads(request.data)
+    # assignment_id = req['assignment_id']
+    # description = req['description']
+    # due_date = req['due_date']
+    # answer = req['answer']
+    # cursor.execute(f"UPDATE student_assignment SET answer = '{answer}' where assignment_id = '{assignment_id}';")
+    # connect.commit()
+    # return {}
 
 @app.route('/new_ann', methods=['POST'])
 def new_ann():
@@ -96,6 +123,15 @@ def new_ann():
     connect.commit()
     return {}
 
+@app.route('/new_ass', methods=['POST'])
+def new_ass():
+    req = json.loads(request.data)
+    description = req['description']
+    due = req['due']
+    points = req['points']
+    cursor.execute(f"INSERT INTO assignments (course_id, due_date, points, description) Values (1, '{due}', {points}, '{description}');")
+    connect.commit()
+    return {}
 
 @app.route('/<user_id>')
 def dashboard(user_id):
