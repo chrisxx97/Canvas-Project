@@ -108,7 +108,7 @@ class Main extends Component {
                                 <Route path="/logout" element={<Logout />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/signup" element={<SignUp />} />
-                                <Route path="/AnswerSq" element={<AnswerSq />} />
+                                <Route path="/login/AnswerSq" element={<AnswerSq />} />
                             </Routes>
                         </div>
                     </div>
