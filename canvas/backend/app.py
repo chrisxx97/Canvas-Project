@@ -109,8 +109,15 @@ def validate_login():
     else:   # make matching password 0 so that login always fails
         matching_password = 0
     print(matching_password)
+
+    user = cursor.execute("SELECT user_id, role FROM users WHERE username = '{0}';".format(username)).fetchall()[0]
+    user_id = user[0]
+    role = user[1]
+
     response_body = {
-        "success": password == matching_password
+        "success": password == matching_password,
+        "user_id": user_id,
+        "role": role
     }
     return json.dumps(response_body)
 

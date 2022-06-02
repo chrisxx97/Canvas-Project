@@ -19,9 +19,13 @@ export default function Login() {
 			.then(response => {
 				console.log(response)
 				if(response.data['success']){
+					let user_id = response.data['user_id']
+					let role = response.data['role']
 					window.sessionStorage.setItem('login', true)
 					window.location.reload(false)
 					window.sessionStorage.setItem('user_name', username)
+					window.sessionStorage.setItem('user_id', user_id)
+					window.sessionStorage.setItem('role', role)
 				}else{
 					alert('login fails')
 
@@ -51,4 +55,3 @@ export default function Login() {
 	);
 	
 }
-

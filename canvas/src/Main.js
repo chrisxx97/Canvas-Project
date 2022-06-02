@@ -16,10 +16,20 @@ import AnswerSq from "./AnswerSq";
 
 
 class Main extends Component {
+
+    hideSettings() {
+        setTimeout(() => {
+            if (window.sessionStorage.getItem('role').localeCompare("admin")) {
+                document.getElementById("settings").style.display = "none"
+            }
+        }, 50)
+    }
+
     render() {
         console.log(window.sessionStorage.getItem('login'))
         if (window.sessionStorage.getItem('login')) {
             //logged in
+            this.hideSettings()
             return (
                 <>
                     <BrowserRouter>
@@ -27,14 +37,12 @@ class Main extends Component {
                             <ul id="side-menu">
                             <li id="logo">
                                 <NavLink id="logo-a" to="/">
-                                    <img id="logo-img" src="assets/UChicago_Shield_2Color_Maroon_WhiteBorder_RGB.png"
+                                    <img id="logo-img" src={require("./assets/UChicago_Shield_2Color_Maroon_WhiteBorder_RGB.png")}
                                         alt="logo" />
                                 </NavLink>
                             </li>
                             <li className="menu-item">
                                 <NavLink to="/account">
-                                    <img src="https://canvas.uchicago.edu/images/messages/avatar-50.png"
-                                        alt="account" />
                                     <div>Account</div>
                                 </NavLink>
                             </li>
@@ -48,7 +56,7 @@ class Main extends Component {
                                     <div>Courses</div>
                                 </NavLink>
                             </li>
-                            <li className="menu-item">
+                            <li className="menu-item" id="settings">
                                 <NavLink to="/settings">
                                     <div>Settings</div>
                                 </NavLink>
