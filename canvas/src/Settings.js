@@ -167,63 +167,76 @@ class Settings extends Component {
         });
     }
 
-    render() {
-        if (!this.state.loaded) {
-            this.setState({
-                loaded: true
-            });
-            this.getData()
-            this.statusButtons()
-            this.setOptions()
+    isAdmin() {
+        if (window.sessionStorage.getItem('role').localeCompare("admin")) {
+            return false
         }
-        return (
-            <div>
-                <h2>Settings</h2>
-                <h3>Registered Users</h3>
+        return true
+    }
 
+    render() {
+        if (this.isAdmin()) {
+            if (!this.state.loaded) {
+                this.setState({
+                    loaded: true
+                });
+                this.getData()
+                this.statusButtons()
+                this.setOptions()
+            }
+            return (
                 <div>
-                    Search: <input type="text" id="search" onKeyUp={this.usersSearchFilter} placeholder="Name or Email" />
-                </div>
+                    <h2>Settings</h2>
+                    <h3>Registered Users</h3>
 
-                <div onChange={this.usersSearchFilter}>
-                    Filter by Status:
-                    <input type="radio" id="all" name="filter" value="all" />
-                    <label htmlFor="all">All</label>
-                    <input type="radio" id="active" name="filter" value="active" />
-                    <label htmlFor="active">Active</label>
-                    <input type="radio" id="inactive" name="filter" value="inactive" />
-                    <label htmlFor="inactive">Inactive</label>
-                </div>
-                <br />
+                    <div>
+                        Search: <input type="text" id="search" onKeyUp={this.usersSearchFilter} placeholder="Name or Email" />
+                    </div>
 
-                <table id="users-table" border="1">
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Change Status</th>
-                    </tr>
-                </table>
-                <br />
-
-                <form onSubmit={this.attachCourse}>
-                    <label>
-                        Add a class for a user: <br />
-                        <select id="attach-course-user" value={this.state.user_id} onChange={this.handleFormChangeUser}>
-                            <option value="none" selected disabled hidden>Select a User</option>
-                        </select>
-                        <select id="attach-course-course" value={this.state.course_to_add} onChange={this.handleFormChangeCourse}>
-                            <option value="none" selected disabled hidden>Select a Course</option>
-                        </select>
-                    </label>
-                    <input type="submit" value="Submit" />
+                    <div onChange={this.usersSearchFilter}>
+                        Filter by Status:
+                        <input type="radio" id="all" name="filter" value="all" />
+                        <label htmlFor="all">All</label>
+                        <input type="radio" id="active" name="filter" value="active" />
+                        <label htmlFor="active">Active</label>
+                        <input type="radio" id="inactive" name="filter" value="inactive" />
+                        <label htmlFor="inactive">Inactive</label>
+                    </div>
                     <br />
-                    <p id="attach-course-success"></p>
-                </form>
 
-            </div>
-        );
+                    <table id="users-table" border="1">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Change Status</th>
+                        </tr>
+                    </table>
+                    <br />
+
+                    <form onSubmit={this.attachCourse}>
+                        <label>
+                            Add a class for a user: <br />
+                            <select id="attach-course-user" value={this.state.user_id} onChange={this.handleFormChangeUser}>
+                                <option value="none" selected disabled hidden>Select a User</option>
+                            </select>
+                            <select id="attach-course-course" value={this.state.course_to_add} onChange={this.handleFormChangeCourse}>
+                                <option value="none" selected disabled hidden>Select a Course</option>
+                            </select>
+                        </label>
+                        <input type="submit" value="Submit" />
+                        <br />
+                        <p id="attach-course-success"></p>
+                    </form>
+
+                </div>
+            )
+        } else {
+            return (
+                <div>You are not authorized to view the Settings page.</div>
+            )
+        }
     }
 }
 

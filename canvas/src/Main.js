@@ -16,10 +16,20 @@ import AnswerSq from "./AnswerSq";
 
 
 class Main extends Component {
+
+    hideSettings() {
+        setTimeout(() => {
+            if (window.sessionStorage.getItem('role').localeCompare("admin")) {
+                document.getElementById("settings").style.display = "none"
+            }
+        }, 50)
+    }
+
     render() {
         console.log(window.sessionStorage.getItem('login'))
         if (window.sessionStorage.getItem('login')) {
             //logged in
+            this.hideSettings()
             return (
                 <>
                     <BrowserRouter>
@@ -46,7 +56,7 @@ class Main extends Component {
                                     <div>Courses</div>
                                 </NavLink>
                             </li>
-                            <li className="menu-item">
+                            <li className="menu-item" id="settings">
                                 <NavLink to="/settings">
                                     <div>Settings</div>
                                 </NavLink>
