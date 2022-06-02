@@ -102,16 +102,16 @@ def change_status():
     connect.commit()
     return {}
 
-# @app.route('/new_submission', method=['GET','POST'])
-# def new_submission():
-#     req = json.loads(request.data)
-    # assignment_id = req['assignment_id']
-    # description = req['description']
-    # due_date = req['due_date']
-    # answer = req['answer']
-    # cursor.execute(f"UPDATE student_assignment SET answer = '{answer}' where assignment_id = '{assignment_id}';")
-    # connect.commit()
-    # return {}
+@app.route('/new_submission', methods=['GET','POST'])
+def new_submission():
+    req = json.loads(request.data)
+    assignment_id = req['assignment_id']
+    description = req['description']
+    due_date = req['due_date']
+    answer = req['answer']
+    cursor.execute(f"UPDATE student_assignment SET answer = '{answer}' where assignment_id = '{assignment_id}';")
+    connect.commit()
+    return {}
 
 @app.route('/new_ann', methods=['POST'])
 def new_ann():

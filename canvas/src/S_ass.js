@@ -1,5 +1,4 @@
 import React, {useState, useEffect, Fragment} from "react";
-import { BrowserRouter, Link,NavLink, Route, Routes } from 'react-router-dom';
 import EditableRow from "./components/EditableRow";
 import ReadOnlyRow from "./components/ReadOnlyRow";
 
@@ -35,6 +34,21 @@ const S_ass = () =>{
         setEditFormData(newFormData);
     }
 
+    function submitData(){
+        // const data = { username: 'example' };
+
+        fetch("/new_submission", {
+            method: "POST",
+            body: JSON.stringify({
+                assignment_id:editFormData.assignment_id,
+                description:editFormData.description,
+                due_date: editFormData.due_date,
+                answer: editFormData.answer,
+                test: "test"
+            })
+            // body: JSON.stringify(data),
+            }).then(response=> response.json());
+    }
     const handelEditFormSubmit = async (event) => {
         event.preventDefault();
 
@@ -58,21 +72,9 @@ const S_ass = () =>{
         
         // request.send(JSON.stringify({"assignment_id":editFormData.assignment_id, 
         //     "description": editFormData.description, "due_date":editFormData.due_date, "answer":editFormData.answer}))
+        submitData();
 
-
-        const data = { username: 'example' };
-
-        fetch("/new_submission", {
-            method: "POST",
-            // body: JSON.stringify({
-                // assignment_id:editFormData.assignment_id,
-                // description:editFormData.description,
-                // due_date: editFormData.due_date,
-                // answer: editFormData.answer,
-                // test: "test"
-            // })
-            body: JSON.stringify(data),
-            }).then(response=> response.json());
+        
         setEditID(null);
 
     }
