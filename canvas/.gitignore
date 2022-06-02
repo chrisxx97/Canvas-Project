@@ -26,3 +26,4 @@ yarn-error.log*
 .flaskenv
 __pycache__/
 env/
+*.db
