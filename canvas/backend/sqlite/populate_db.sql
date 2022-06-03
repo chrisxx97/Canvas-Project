@@ -7,7 +7,7 @@
 --   .save canvas.db
 
 INSERT INTO users VALUES (1, 'username1', 'pw01!', 'Christine Romero', 'username1@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
-INSERT INTO users VALUES (2, 'username2', 'pd02!', 'Darren Jones', 'username2@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
+INSERT INTO users VALUES (2, 'username2', 'pw02!', 'Darren Jones', 'username2@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
 INSERT INTO users VALUES (3, 'username3', 'pw03!', 'Jonathan Owens', 'username3@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
 INSERT INTO users VALUES (4, 'username4', 'pw04!', 'Karen Thomas', 'username4@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
 INSERT INTO users VALUES (5, 'username5', 'pw05!', 'Stephen Simpson', 'username5@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');

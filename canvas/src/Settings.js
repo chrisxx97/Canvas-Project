@@ -146,7 +146,7 @@ class Settings extends Component {
         request.onreadystatechange = function() {
             if(this.readyState === 4 && this.status === 200) {
                 let p = document.getElementById("attach-course-success")
-                document.getElementById("attach-course-success").style.display = "";
+                p.style.display = "";
                 p.innerText = JSON.parse(this.response).message
             }
         }
@@ -216,15 +216,13 @@ class Settings extends Component {
                     <br />
 
                     <form onSubmit={this.attachCourse}>
-                        <label>
                             Add a class for a user: <br />
                             <select id="attach-course-user" value={this.state.user_id} onChange={this.handleFormChangeUser}>
-                                <option value="none" selected disabled hidden>Select a User</option>
+                                <option value="none" selected disabled>Select a User</option>
                             </select>
                             <select id="attach-course-course" value={this.state.course_to_add} onChange={this.handleFormChangeCourse}>
-                                <option value="none" selected disabled hidden>Select a Course</option>
+                                <option value="none" selected disabled>Select a Course</option>
                             </select>
-                        </label>
                         <input type="submit" value="Submit" />
                         <br />
                         <p id="attach-course-success"></p>
