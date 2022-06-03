@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import {
     Route,
     Routes,
@@ -31,55 +31,53 @@ class Main extends Component {
             //logged in
             this.hideSettings()
             return (
-                <>
-                    <BrowserRouter>
-                        <div>
-                            <ul id="side-menu">
-                                <li id="logo">
-                                    <NavLink id="logo-a" to="/">
-                                        <img id="logo-img" src={require("./assets/UChicago_Shield_2Color_Maroon_WhiteBorder_RGB.png")}
-                                            alt="logo" />
-                                    </NavLink>
-                                </li>
-                                <li className="menu-item" id="account">
-                                    <NavLink to="/account">
-                                        <div>Account</div>
-                                    </NavLink>
-                                </li>
-                                <li className="menu-item" id="dashboard">
-                                    <NavLink to="/">
-                                        <div>Dashboard</div>
-                                    </NavLink>
-                                </li>
-                                <li className="menu-item" id="courses">
-                                    <NavLink to="/courses_menu" onclick={openCourseBar}>
-                                        <div>Courses</div>
-                                    </NavLink>
-                                </li>
-                                <li className="menu-item" id="settings">
-                                    <NavLink to="/settings">
-                                        <div>Settings</div>
-                                    </NavLink>
-                                </li>
-                                <li className="menu-item">
-                                    <NavLink to="logout">
-                                        <div>Logout</div>
-                                    </NavLink>
-                                </li>
-                            </ul>
-                            
-                            <div className="content">
-                                <Routes>
-                                    <Route exact path="/" element={<Dashboard />} />
-                                    <Route path="/account" element={<Account />} />
-                                    <Route path="/courses_menu/*" element={<Courses_menu />} />
-                                    <Route path="/settings" element={<Settings />} />
-                                    <Route exact path="/logout" element={<Logout />} />
-                                </Routes>
-                            </div>
+                <BrowserRouter>
+                    <div>
+                        <ul id="side-menu">
+                            <li id="logo">
+                                <NavLink id="logo-a" to="/">
+                                    <img id="logo-img" src={require("./assets/UChicago_Shield_2Color_Maroon_WhiteBorder_RGB.png")}
+                                        alt="logo" />
+                                </NavLink>
+                            </li>
+                            <li className="menu-item" id="account">
+                                <NavLink to="/account">
+                                    <div>Account</div>
+                                </NavLink>
+                            </li>
+                            <li className="menu-item" id="dashboard">
+                                <NavLink to="/">
+                                    <div>Dashboard</div>
+                                </NavLink>
+                            </li>
+                            <li className="menu-item" id="courses">
+                                <NavLink to="/courses_menu" onclick={openCourseBar}>
+                                    <div>Courses</div>
+                                </NavLink>
+                            </li>
+                            <li className="menu-item" id="settings">
+                                <NavLink to="/settings">
+                                    <div>Settings</div>
+                                </NavLink>
+                            </li>
+                            <li className="menu-item">
+                                <NavLink to="logout">
+                                    <div>Logout</div>
+                                </NavLink>
+                            </li>
+                        </ul>
+
+                        <div className="content">
+                            <Routes>
+                                <Route exact path="/" element={<Dashboard />} />
+                                <Route path="/account" element={<Account />} />
+                                <Route path="/courses_menu/*" element={<Courses_menu />} />
+                                <Route path="/settings" element={<Settings />} />
+                                <Route exact path="/logout" element={<Logout />} />
+                            </Routes>
                         </div>
-                    </BrowserRouter>
-                </>
+                    </div>
+                </BrowserRouter>
             )
         } else {
             return (

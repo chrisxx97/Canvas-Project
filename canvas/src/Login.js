@@ -18,7 +18,9 @@ export default function Login() {
 		axios.post('http://localhost:5000/login', data)
 			.then(response => {
 				console.log(response)
-				if(response.data['success']){
+				if (response.data['inactive']) {
+					alert('Please wait for Admin to activate your account.')
+				} else if(response.data['success']){
 					let user_id = response.data['user_id']
 					let role = response.data['role']
 					window.sessionStorage.setItem('login', true)

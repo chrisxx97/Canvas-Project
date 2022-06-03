@@ -78,6 +78,7 @@ const T_grades = () => {
                                     <th>Student ID</th>
                                     <th>Assignment ID</th>
                                     <th>Description</th>
+                                    <th>Student Answer</th>
                                     <th>Total points</th>
                                     <th>Grade</th>
                                     <th>Action</th>

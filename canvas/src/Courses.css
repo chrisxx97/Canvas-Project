@@ -1,6 +1,7 @@
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+    /* .styled-table */
 }
 
 .menu-icon{
@@ -75,6 +76,10 @@
     font-family: sans-serif;
     max-width: 1200px;
     table-layout: fixed;
+    @media only screen and (min-width : 768px) {
+        width: 75%;
+        background-color: green;
+      }
     /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
 }
 

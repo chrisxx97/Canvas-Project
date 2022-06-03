@@ -39,7 +39,7 @@ function Ass_form(){
 
         let request = new XMLHttpRequest()
         request.open("POST", "/new_ass")
-        alert("Success! \nNew Announcement Posted.")
+        alert("Success! \nNew Assignment Posted.")
 
         
         request.send(JSON.stringify({"description": inputs.description, "due":inputs.due, "points":inputs.points}))
@@ -49,10 +49,10 @@ function Ass_form(){
 
       return (
         <div>
-            <h2>New Announcement:</h2>
+            <h2>New Assignment:</h2>
             <form onSubmit={handleSubmit}>
                 <label> Description
-                <input  name = "description" value = {inputs.description || ""} onChange={handleChange} />
+                <textarea  name = "description" value = {inputs.description || ""} onChange={handleChange} />
                 </label>
                 <label> Due Date
                 <input name = "due" type = "date" value = {inputs.due || ""} onChange = {handleChange}/>
