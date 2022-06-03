@@ -81,30 +81,53 @@ class Account extends Component {
         return (
             <div>
                 <h2>Account</h2>
-                <h3>Profile</h3>
-                <div>
-                    <p id="account-name"></p>
+                <br />
+                <h4>Profile</h4>
+                <br />
+                <div class="row">
+                    <div class="col-md-2">
+                        <p id="account-name"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p id="account-email"></p>
+                    </div>
                 </div>
-                <div>
-                    <p id="account-username"></p>
+                <div className="row">
+                    <div class="col-md-2">
+                        <p id="account-username"></p>
+                    </div>
+                    <div class="col-md-2">
+                        <p id="account-id"></p>
+                    </div>
+                    <div class="col-md-2">
+                        <p id="account-role"></p>
+                    </div>
                 </div>
-                <div>
-                    <p id="account-id"></p>
-                </div>
-                <div>
-                    <p id="account-email"></p>
-                </div>
-                <div>
-                    <p id="account-role"></p>
-                </div>
-                <button id="edit-profile-button" onClick={this.showEditProfileForm}>Edit Profile</button>
+                <br />
+                <button id="edit-profile-button" class="btn btn-outline-secondary" onClick={this.showEditProfileForm}>Edit Profile</button>
                 <br />
                 <div id="edit-profile" style={{display: "none"}}>
+                    <h4>Edit Profile</h4>
                     <form onSubmit={this.editProfile}>
-                        Name: <input name="name" type="text" value={this.state.new_name} onInput={this.inputNewName}/><br />
-                        Email: <input name="email" type="email" value={this.state.new_email} onInput={this.inputNewEmail}/><br />
-                        <input type="submit" value="Edit" />
-                        <br />
+                        <div class="row">
+                            <label htmlFor="edit-form-name" className="col-sm-1 col-form-label">Name</label>
+                            <div className="col-sm-3">
+                                <input className="form-control" id="edit-form-name" name="name" type="text"
+                                       value={this.state.new_name} onInput={this.inputNewName}/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <label htmlFor="edit-form-email" className="col-sm-1 col-form-label">Email</label>
+                            <div className="col-sm-3">
+                                <input className="form-control" id="edit-form-email" name="email" type="email"
+                                       value={this.state.new_email} onInput={this.inputNewEmail}/>
+                            </div>
+                            <div className="col-sm-2">
+                                <input className="form-control" type="submit" value="Edit" />
+                            </div>
+
+                        </div>
+
                     </form>
                 </div>
                 <p id="edit-profile-success"></p>
