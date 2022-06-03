@@ -18,7 +18,9 @@ export default function Login() {
 		axios.post('http://localhost:5000/login', data)
 			.then(response => {
 				console.log(response)
-				if(response.data['success']){
+				if (response.data['inactive']) {
+					alert('Please wait for Admin to activate your account.')
+				} else if(response.data['success']){
 					let user_id = response.data['user_id']
 					let role = response.data['role']
 					window.sessionStorage.setItem('login', true)
@@ -43,7 +45,7 @@ export default function Login() {
 			<h4 id="login">Log in to Your UChicago Account</h4>
 			<br />
 			<form name="myform" >
-				<input type="text" id="username" name="username" placeholder="name" 
+				<input type="text" id="username" name="username" placeholder="Username"
 				onChange={(e) => setUsername(e.target.value)} /><br />
 				<input type="text" id="pwd" name="pwd" placeholder="Password" 
 				onChange={(e) => setPwd(e.target.value)}/><br /><br />

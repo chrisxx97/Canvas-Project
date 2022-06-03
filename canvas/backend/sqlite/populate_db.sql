@@ -7,7 +7,7 @@
 --   .save canvas.db
 
 INSERT INTO users VALUES (1, 'username1', 'pw01!', 'Christine Romero', 'username1@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
-INSERT INTO users VALUES (2, 'username2', 'pd02!', 'Darren Jones', 'username2@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
+INSERT INTO users VALUES (2, 'username2', 'pw02!', 'Darren Jones', 'username2@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
 INSERT INTO users VALUES (3, 'username3', 'pw03!', 'Jonathan Owens', 'username3@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
 INSERT INTO users VALUES (4, 'username4', 'pw04!', 'Karen Thomas', 'username4@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
 INSERT INTO users VALUES (5, 'username5', 'pw05!', 'Stephen Simpson', 'username5@uchicago.edu', 'active', 'student', 'security question answer 1', 'security question answer 2', 'security question answer 3');
@@ -24,10 +24,9 @@ INSERT INTO courses VALUES (1, 'Web Development', 6, 30, 'This course is intende
 INSERT INTO courses VALUES (2, 'Cloud Computing', NULL, 40, 'Welcome to Cloud Computing! This course provides an introduction to cloud computing, with a focus on building cloud-deployed web applications.');
 INSERT INTO courses VALUES (3, 'Algorithms', 11, 50, 'This course is about the design and analysis of algorithms. Students will be introduced to the basics of algorithms analysis, several algorithm design paradigms, and problems for which there are no known efficient algorithms. Each of these topics will be illustrated by studying problems and the best known algorithms for solving these problems.');
 INSERT INTO courses VALUES (4, 'Foundations of Computer Networks', 13, 80, 'This course focuses on the principles and techniques used in the development of networked and distributed software. Topics include programming with sockets; concurrent programming; data link layer (Ethernet, packet switching, 802.11, etc.); internet and routing protocols (IP, IPv6, ARP, intra-domain and inter-domain routing, etc.); end-to-end protocols (UDP, TCP); and other commonly used network protocols and techniques.');
--- INSERT INTO courses VALUES (5, 'Database', 6, 80, 'Welcome to database');
--- INSERT INTO courses VALUES (6, 'Distributed Systems', 6, 80, 'Welcome to database');
--- INSERT INTO courses VALUES (7, 'Object oriented Programming', 6, 80, 'Welcome to database');
-
+-- INSERT INTO courses VALUES (5, 'Database', 6, 80, 'Welcome to Database');
+-- INSERT INTO courses VALUES (6, 'Distributed Systems', 6, 80, 'Welcome to Distributed Systems');
+-- INSERT INTO courses VALUES (7, 'Object oriented Programming', 6, 80, 'Welcome to Object oriented Programming');
 
 INSERT INTO announcements VALUES (1, 1, '04/04/2022', 'Laptop', 'Hi Class, Make sure you bring your laptop tomorrow to the class. See you all tomorrow!');
 INSERT INTO announcements VALUES (2, 1, '04/15/2022', 'Javascript Lecture', 'The recorded lecture is now available on Canvas.');
@@ -70,17 +69,17 @@ INSERT INTO student_assignment VALUES (5, 2, 5, 98, 'answer');
 INSERT INTO student_assignment VALUES (6, 2, 6, NULL, 'answer');
 INSERT INTO student_assignment VALUES (7, 2, 7, 2, 'answer');
 INSERT INTO student_assignment VALUES (8, 2, 8, NULL, 'answer');
--- INSERT INTO student_assignment VALUES (9, 3, 5, NULL, 'answer');
--- INSERT INTO student_assignment VALUES (10, 3, 6, 1, 'answer');
--- INSERT INTO student_assignment VALUES (11, 3, 7, 90, 'answer');
--- INSERT INTO student_assignment VALUES (12, 3, 8, 80, 'answer');
--- INSERT INTO student_assignment VALUES (13, 4, 1, 100, 'answer');
--- INSERT INTO student_assignment VALUES (14, 4, 2, NULL, NULL);
--- INSERT INTO student_assignment VALUES (15, 4, 7, 95, 'answer');
--- INSERT INTO student_assignment VALUES (16, 4, 8, 100, 'answer');
--- INSERT INTO student_assignment VALUES (17, 5, 3, 100, NULL);
--- INSERT INTO student_assignment VALUES (18, 5, 4, 100, NULL);
--- INSERT INTO student_assignment VALUES (19, 5, 7, 1, 'answer');
--- INSERT INTO student_assignment VALUES (20, 5, 8, NULL, 'answer');
--- INSERT INTO student_assignment VALUES (21, 1, 7, 100, 'answer');
--- INSERT INTO student_assignment VALUES (22, 1, 8, 80, 'answer');
+INSERT INTO student_assignment VALUES (9, 3, 5, NULL, 'answer');
+INSERT INTO student_assignment VALUES (10, 3, 6, 1, 'answer');
+INSERT INTO student_assignment VALUES (11, 3, 7, 90, 'answer');
+INSERT INTO student_assignment VALUES (12, 3, 8, 80, 'answer');
+INSERT INTO student_assignment VALUES (13, 4, 1, 100, 'answer');
+INSERT INTO student_assignment VALUES (14, 4, 2, NULL, NULL);
+INSERT INTO student_assignment VALUES (15, 4, 7, 95, 'answer');
+INSERT INTO student_assignment VALUES (16, 4, 8, 100, 'answer');
+INSERT INTO student_assignment VALUES (17, 5, 3, 100, NULL);
+INSERT INTO student_assignment VALUES (18, 5, 4, 100, NULL);
+INSERT INTO student_assignment VALUES (19, 5, 7, 1, 'answer');
+INSERT INTO student_assignment VALUES (20, 5, 8, NULL, 'answer');
+INSERT INTO student_assignment VALUES (21, 1, 7, 100, 'answer');
+INSERT INTO student_assignment VALUES (22, 1, 8, 80, 'answer');
