@@ -101,6 +101,38 @@ def get_users_courses():
     }
     return json.dumps(response_body)
 
+@app.route('/users/<user_id>')
+def get_user(user_id):
+    user = cursor.execute("SELECT * FROM users WHERE user_id = {0};".format(user_id)).fetchall()[0]
+    response_body = {
+        "user": user
+    }
+    return json.dumps(response_body)
+
+@app.route('/edit_profile/<user_id>', methods=['POST'])
+def edit_profile(user_id):
+    req = json.loads(request.data)
+    newName = req['new_name']
+    newEmail = req['new_email']
+    msg = ""
+
+    if newName != None and newName != "":
+        print(newName)
+        cursor.execute("UPDATE users SET full_name = '{0}' WHERE user_id = {1};".format(newName, user_id))
+        connect.commit()
+        msg = "Your name is now " + newName + "\n"
+    if newEmail != None and newEmail != "":
+        cursor.execute("UPDATE users SET email = '{0}' WHERE user_id = {1};".format(newEmail, user_id))
+        connect.commit()
+        msg += "Your email is now " + newEmail
+    if (newName == None and newEmail == None) or (newName == "" and newEmail == None) or (newName == None and newEmail == "") or (newName == "" and newEmail == ""):
+        msg = "Please enter a new name and/or email"
+
+    response_body = {
+        "message": msg
+    }
+    return json.dumps(response_body)
+
 @app.route('/settings', methods=['POST'])
 def change_status():
     req = json.loads(request.data)
