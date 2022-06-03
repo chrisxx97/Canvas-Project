@@ -41,17 +41,17 @@ class Main extends Component {
                                             alt="logo" />
                                     </NavLink>
                                 </li>
-                                <li className="menu-item">
+                                <li className="menu-item" id="account">
                                     <NavLink to="/account">
                                         <div>Account</div>
                                     </NavLink>
                                 </li>
-                                <li className="menu-item">
+                                <li className="menu-item" id="dashboard">
                                     <NavLink to="/">
                                         <div>Dashboard</div>
                                     </NavLink>
                                 </li>
-                                <li className="menu-item">
+                                <li className="menu-item" id="courses">
                                     <NavLink to="/courses_menu" onclick={openCourseBar}>
                                         <div>Courses</div>
                                     </NavLink>
