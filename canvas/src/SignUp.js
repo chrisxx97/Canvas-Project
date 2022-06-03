@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import "./login.css";
 import axios from "axios";
 function check_pwd(pwd){
 	let rule1 = (pwd.length >= 5);

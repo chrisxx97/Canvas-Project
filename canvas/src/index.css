@@ -47,3 +47,8 @@
   padding-left: 15px;
   padding-top: 15px;
 }
+
+#root {
+  width: 100%;
+  max-width: 1500px;
+}
