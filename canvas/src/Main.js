@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
     Route,
     Routes,
@@ -7,13 +7,13 @@ import {
 } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Account from "./Account";
-import Courses from "./Courses";
 import Settings from "./Settings";
 import Logout from "./Logout";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import AnswerSq from "./AnswerSq";
-
+import Courses_menu from "./Courses_menu";
+import openCourseBar from "./Courses_menu";
 
 class Main extends Component {
 
@@ -52,7 +52,8 @@ class Main extends Component {
                                 </NavLink>
                             </li>
                             <li className="menu-item">
-                                <NavLink to="/courses" onclick={openCourseBar}>
+                                <NavLink to="/courses_menu" onclick={openCourseBar}>
+                                <img className = "menu-icon" alt = "" src="course.png"/>
                                     <div>Courses</div>
                                 </NavLink>
                             </li>
@@ -73,7 +74,7 @@ class Main extends Component {
                                     <Route exact path="/" element={<Dashboard />} />
                                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                                     <Route path="/account" element={<Account />} />
-                                    <Route path="/courses" element={<Courses />} />
+                                    <Route path="/courses_menu/*" element={<Courses_menu />} />
                                     <Route path="/settings" element={<Settings />} />
                                     {/* <Route path="/logout/*" element={<Logout />} /> */}
                                     <Route exact path="/logout" element={<Logout />} />
@@ -121,9 +122,5 @@ class Main extends Component {
     // }
 }
 
-function openCourseBar() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("courses-content").style.left = "250px";
-}
 
 export default Main;

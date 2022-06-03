@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS announcements;
 CREATE TABLE announcements (
-    announcement_id INTEGER PRIMARY KEY, 
+    announcement_id INTEGER PRIMARY KEY AUTOINCREMENT, 
 	course_id INTEGER NOT NULL, 
-	title varchar(500) NOT NULL, 
-	posted_date date NOT NULL, 
+	posted_date date NOT NULL,
+	title varchar(500), 
 	content varchar(5000) NOT NULL, 
 	FOREIGN KEY (course_id) REFERENCES courses
 );
@@ -19,7 +19,7 @@ CREATE TABLE enrollments (
 
 DROP TABLE IF EXISTS student_assignment;
 CREATE TABLE student_assignment (
-    s_assignment_id INTEGER PRIMARY KEY, 
+    s_assignment_id INTEGER PRIMARY KEY AUTOINCREMENT, 
 	user_id INTEGER NOT NULL, 
 	assignment_id INTEGER NOT NULL, 
 	grade INTEGER, 
@@ -33,9 +33,9 @@ DROP TABLE IF EXISTS assignments;
 CREATE TABLE assignments (
     assignment_id INTEGER PRIMARY KEY, 
 	course_id INTEGER NOT NULL, 
-	title varchar(500) NOT NULL UNIQUE, 
-	due_date date NOT NULL, 
-	points INTEGER NOT NULL, 
+	due_date date NOT NULL,
+	points INTEGER NOT NULL,
+	title varchar(500), 
 	description varchar(5000) NOT NULL, 
 	check(points >= 0), 
 	FOREIGN KEY (course_id) REFERENCES courses

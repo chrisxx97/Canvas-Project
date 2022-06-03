@@ -17,7 +17,7 @@
     left: 0;
     background-color: #a3a0a08c;
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: 0.3s;
     padding-top: 60px;
 }
 
@@ -58,4 +58,60 @@
 #courses-content {
     position: relative;
     left: 250px;
+}
+
+#course-icon{
+    position: relative;
+    left: 10px;
+    color:aliceblue;
+    font-size: 20px;
+}
+
+
+.styled-table {
+    /* border-collapse: collapse; */
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    max-width: 1200px;
+    table-layout: fixed;
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
+}
+
+.styled-table thead tr {
+    background-color: #7e2502;
+    color: #ffffff;
+    text-align: center;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border: 1px solid #585858;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+textarea {
+    width: 400px;
+    height: 100px;
+}
+
+.secondary_menu li {
+    list-style-type: none;
+    padding: 12px 12px;
+    font-size: 1.2em;
+    font-family: sans-serif;
+
+}
+
+
+button {
+  text-align: center;
+  margin: auto;
 }

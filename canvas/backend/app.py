@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 import sqlite3, json, time
 from datetime import datetime
@@ -29,6 +29,67 @@ def my_profile():
     }
     return json.dumps(response_body)
 
+@app.route('/s_assignments')
+def s_assignments():
+    con = connect
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    assignments = cur.execute("SELECT assignments.assignment_id, description, due_date, answer FROM assignments left join student_assignment on student_assignment.assignment_id = assignments.assignment_id").fetchall()
+    return jsonify(assignments)
+
+@app.route('/t_assignments')
+def t_assignments():
+    con = connect
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    assignments = cur.execute("SELECT assignment_id, description, points, due_date from assignments").fetchall()
+    return jsonify(assignments)
+
+@app.route('/s_ann')
+def s_ann():
+    ann = cursor.execute("SELECT * from announcements").fetchall()
+    response_body = {
+        "data":ann
+    }
+    return json.dumps(response_body)
+
+
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+@app.route('/t_ann')
+def t_ann():
+    con = connect
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    ann = cur.execute("SELECT * from announcements").fetchall()
+
+    return jsonify(ann)
+
+
+@app.route('/s_grade')
+def s_grade():
+    ann = cursor.execute("SELECT assignments.assignment_id, description, points, grade from student_assignment natural join assignments").fetchall()
+    response_body = {
+        "data":ann
+    }
+    return json.dumps(response_body)
+
+@app.route('/t_grade')
+def t_grade():
+    ann = cursor.execute("SELECT s_assignment_id, user_id, assignments.assignment_id, description, points, grade from student_assignment natural join assignments").fetchall()
+    response_body = {
+        "data":ann
+    }
+    return json.dumps(response_body)
+
+
+@app.route('/users')
+def get_users():
+    users = cursor.execute("SELECT * FROM users;").fetchall()
 @app.route('/users_courses')
 def get_users_courses():
     users = cursor.execute("SELECT * FROM users WHERE role != 'admin';").fetchall()
@@ -45,6 +106,37 @@ def change_status():
     newStatus = req['newStatus']
     email = req['email']
     cursor.execute("UPDATE users SET status = '{0}' WHERE email = '{1}';".format(newStatus, email))
+    connect.commit()
+    return {}
+
+@app.route('/new_submission', methods=['GET','POST'])
+def new_submission():
+    req = json.loads(request.data)
+    assignment_id = req['assignment_id']
+    description = req['description']
+    due_date = req['due_date']
+    answer = req['answer']
+    cursor.execute(f"UPDATE student_assignment SET answer = '{answer}' where assignment_id = '{assignment_id}';")
+    connect.commit()
+    return {}
+
+@app.route('/new_ann', methods=['POST'])
+def new_ann():
+    req = json.loads(request.data)
+    now = datetime.now() # current date and time
+    date_time = now.strftime("%m/%d/%Y")
+    content = req['content']
+    cursor.execute(f"INSERT INTO announcements (course_id, posted_date, content) Values (1, '{date_time}', '{content}');")
+    connect.commit()
+    return {}
+
+@app.route('/new_ass', methods=['POST'])
+def new_ass():
+    req = json.loads(request.data)
+    description = req['description']
+    due = req['due']
+    points = req['points']
+    cursor.execute(f"INSERT INTO assignments (course_id, due_date, points, description) Values (1, '{due}', {points}, '{description}');")
     connect.commit()
     return {}
 
