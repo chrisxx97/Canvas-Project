@@ -22,7 +22,10 @@ class Settings extends Component {
             settings_new_s2: null,
             settings_new_s3: null,
             user_to_edit: null,
-            user_to_edit_idx: -1
+            user_to_edit_idx: -1,
+            new_course_name: null,
+            new_capacity: null,
+            new_description: null
         }
 
         this.handleFormChangeUser = this.handleFormChangeUser.bind(this)
@@ -34,6 +37,10 @@ class Settings extends Component {
         this.inputSettingsNewS2 = this.inputSettingsNewS2.bind(this)
         this.inputSettingsNewS3 = this.inputSettingsNewS3.bind(this)
         this.editUserInfo = this.editUserInfo.bind(this)
+        this.inputNewCourseName = this.inputNewCourseName.bind(this)
+        this.inputNewCapacity = this.inputNewCapacity.bind(this)
+        this.inputNewDescription = this.inputNewDescription.bind(this)
+        this.addNewCourse = this.addNewCourse.bind(this)
     }
 
     getData() {
@@ -274,6 +281,46 @@ class Settings extends Component {
         }))
     }
 
+    inputNewCourseName(event) {
+        this.setState({
+            new_course_name: event.target.value
+        })
+    }
+
+    inputNewCapacity(event) {
+        this.setState({
+            new_capacity: event.target.value
+        })
+    }
+
+    inputNewDescription(event) {
+        this.setState({
+            new_description: event.target.value
+        })
+    }
+
+    addNewCourse(event) {
+        event.preventDefault()
+        let that = this
+        let request = new XMLHttpRequest()
+        request.open("POST", "/add_course")
+        request.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                alert(JSON.parse(this.response).message)
+                that.setState({
+                    new_course_name: null,
+                    new_capacity: null,
+                    new_description: null
+                })
+            }
+        }
+        request.send(JSON.stringify({
+            "new_course_name": that.state.new_course_name,
+            "new_capacity": that.state.new_capacity,
+            "new_description": that.state.new_description
+        }))
+    }
+
     isAdmin() {
         if (window.sessionStorage.getItem('role').localeCompare("admin")) {
             return false
@@ -297,7 +344,6 @@ class Settings extends Component {
                     <h2>Settings</h2>
                     <br />
                     <h4>Registered Users</h4>
-                    <br />
 
                     <div>
                         Search: <input type="text" id="search" onKeyUp={this.usersSearchFilter} placeholder="Name or Email" />
@@ -312,7 +358,6 @@ class Settings extends Component {
                         <input type="radio" id="inactive" name="filter" value="inactive" />
                         <label htmlFor="inactive">Inactive&nbsp;&nbsp;</label>
                     </div>
-                    <br />
 
                     <div class="table-responsive">
                         <table id="users-table" border="1">
@@ -331,7 +376,7 @@ class Settings extends Component {
                     <div class="row">
                         <div class="col-md-6">
                             <form onSubmit={this.attachCourse} className="form-select form-select-md mb-3">
-                                <h4>Add a class for a user: </h4>
+                                <h5>Add a class for a user: </h5>
                                 <select id="attach-course-user" value={this.state.user_id}
                                         onChange={this.handleFormChangeUser}>
                                     <option value="none" selected disabled>Select a User</option>
@@ -346,7 +391,38 @@ class Settings extends Component {
                             </form>
                         </div>
                     </div>
-                    <br />
+                    <br /><br />
+
+                    <div id="add-course">
+                        <h4>Add a New Course</h4>
+                        <form onSubmit={this.addNewCourse}>
+                            <div className="row">
+                                <label htmlFor="add-course-name" className="col-sm-2 col-form-label">New Course Name</label>
+                                <div className="col-sm-3">
+                                    <input className="form-control" id="add-course-name" name="name" type="text"
+                                           value={this.state.new_course_name} onInput={this.inputNewCourseName} required/>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <label htmlFor="add-course-capacity" className="col-sm-2 col-form-label">Capacity</label>
+                                <div className="col-sm-3">
+                                    <input className="form-control" id="add-course-capacity" name="capacity" type="number"
+                                           value={this.state.new_capacity} onInput={this.inputNewCapacity} required/>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <label htmlFor="add-course-description" className="col-sm-2 col-form-label">Description</label>
+                                <div className="col-sm-3">
+                                    <input className="form-control" id="add-course-description" name="s3" type="text"
+                                           value={this.state.new_description} onInput={this.inputNewDescription} required/>
+                                </div>
+                                <div className="col-sm-2">
+                                    <input className="form-control" type="submit" value="Add"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br /><br />
 
                     <div id="edit-user-info" style={{display: "none"}}>
                         <h4 id="edit-user-info-h"></h4>

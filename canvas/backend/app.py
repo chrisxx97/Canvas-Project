@@ -121,7 +121,6 @@ def edit_profile(user_id):
     msg = ""
 
     if newName != None and newName != "":
-        print(newName)
         cursor.execute("UPDATE users SET full_name = '{0}' WHERE user_id = {1};".format(newName, user_id))
         connect.commit()
         msg = "Your name is now " + newName + "\n"
@@ -130,17 +129,17 @@ def edit_profile(user_id):
         connect.commit()
         msg += "Your email is now " + newEmail + "\n"
     if newS1 != None and newS1 != "":
-            cursor.execute("UPDATE users SET security_question_1 = '{0}' WHERE user_id = {1};".format(newS1, user_id))
-            connect.commit()
-            msg += "Your answer for the question \"What is your favorite movie?\" is now \"" + newS1 + "\"\n"
+        cursor.execute("UPDATE users SET security_question_1 = '{0}' WHERE user_id = {1};".format(newS1, user_id))
+        connect.commit()
+        msg += "Your answer for the question \"What is your favorite movie?\" is now \"" + newS1 + "\"\n"
     if newS2 != None and newS2 != "":
-                cursor.execute("UPDATE users SET security_question_2 = '{0}' WHERE user_id = {1};".format(newS2, user_id))
-                connect.commit()
-                msg += "Your answer for the question \"What is your father's middle name?\" is now \"" + newS2 + "\"\n"
+        cursor.execute("UPDATE users SET security_question_2 = '{0}' WHERE user_id = {1};".format(newS2, user_id))
+        connect.commit()
+        msg += "Your answer for the question \"What is your father's middle name?\" is now \"" + newS2 + "\"\n"
     if newS3 != None and newS3 != "":
-                cursor.execute("UPDATE users SET security_question_3 = '{0}' WHERE user_id = {1};".format(newS3, user_id))
-                connect.commit()
-                msg += "Your answer for the question \"What is the make of your first car?\" is now \"" + newS3 + "\"\n"
+        cursor.execute("UPDATE users SET security_question_3 = '{0}' WHERE user_id = {1};".format(newS3, user_id))
+        connect.commit()
+        msg += "Your answer for the question \"What is the make of your first car?\" is now \"" + newS3 + "\"\n"
 
     if not ((newName != None and newName != "") or (newEmail != None and newEmail != "") or (newS1 != None and newS1 != "") or (newS2 != None and newS2 != "") or (newS3 != None and newS3 != "")):
         msg = "Please enter at least an input"
@@ -161,7 +160,6 @@ def edit_user_info_admin(user_email):
     msg = ""
 
     if newName != None and newName != "":
-        print(newName)
         cursor.execute("UPDATE users SET full_name = '{0}' WHERE email = '{1}';".format(newName, user_email))
         connect.commit()
         msg = "Your name is now " + newName + "\n"
@@ -170,20 +168,40 @@ def edit_user_info_admin(user_email):
         connect.commit()
         msg += "Your email is now " + newEmail + "\n"
     if newS1 != None and newS1 != "":
-            cursor.execute("UPDATE users SET security_question_1 = '{0}' WHERE email = '{1}';".format(newS1, user_email))
-            connect.commit()
-            msg += "Your answer for the question \"What is your favorite movie?\" is now \"" + newS1 + "\"\n"
+        cursor.execute("UPDATE users SET security_question_1 = '{0}' WHERE email = '{1}';".format(newS1, user_email))
+        connect.commit()
+        msg += "Your answer for the question \"What is your favorite movie?\" is now \"" + newS1 + "\"\n"
     if newS2 != None and newS2 != "":
-                cursor.execute("UPDATE users SET security_question_2 = '{0}' WHERE email = '{1}';".format(newS2, user_email))
-                connect.commit()
-                msg += "Your answer for the question \"What is your father's middle name?\" is now \"" + newS2 + "\"\n"
+        cursor.execute("UPDATE users SET security_question_2 = '{0}' WHERE email = '{1}';".format(newS2, user_email))
+        connect.commit()
+        msg += "Your answer for the question \"What is your father's middle name?\" is now \"" + newS2 + "\"\n"
     if newS3 != None and newS3 != "":
-                cursor.execute("UPDATE users SET security_question_3 = '{0}' WHERE email = '{1}';".format(newS3, user_email))
-                connect.commit()
-                msg += "Your answer for the question \"What is the make of your first car?\" is now \"" + newS3 + "\"\n"
+        cursor.execute("UPDATE users SET security_question_3 = '{0}' WHERE email = '{1}';".format(newS3, user_email))
+        connect.commit()
+        msg += "Your answer for the question \"What is the make of your first car?\" is now \"" + newS3 + "\"\n"
 
     if not ((newName != None and newName != "") or (newEmail != None and newEmail != "") or (newS1 != None and newS1 != "") or (newS2 != None and newS2 != "") or (newS3 != None and newS3 != "")):
         msg = "Please enter at least an input"
+
+    response_body = {
+        "message": msg
+    }
+    return json.dumps(response_body)
+
+@app.route('/add_course', methods=['POST'])
+def add_course():
+    req = json.loads(request.data)
+    newName = req['new_course_name']
+    newCapacity = req['new_capacity']
+    newDescription = req['new_description']
+    msg = ""
+
+    courses = cursor.execute("SELECT * FROM courses;").fetchall()
+    new_idx = len(courses) + 1
+
+    cursor.execute("INSERT INTO courses VALUES ({0}, '{1}', NULL, {2}, '{3}');".format(new_idx, newName, newCapacity, newDescription))
+    connect.commit()
+    msg = "Successfully added " + newName + " to the system"
 
     response_body = {
         "message": msg
@@ -373,12 +391,6 @@ def validate_sq():
     }
 
     return json.dumps(response_body)
-
-
-
-    # @app.route('/account/<user_name>', methods=['GET'])
-    # def get_account_info(user_name):
-    #     data = cursor.execute("SELECT * from users where")
 
 @app.route('/enrollment', methods=['POST'])
 def enroll():
