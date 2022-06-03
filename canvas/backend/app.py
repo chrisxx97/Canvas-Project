@@ -83,7 +83,7 @@ def t_grade():
     con = connect
     con.row_factory = dict_factory
     cur = con.cursor()
-    ann = cur.execute("SELECT s_assignment_id, user_id, assignments.assignment_id, description, points, grade from student_assignment natural join assignments").fetchall()
+    ann = cur.execute("SELECT s_assignment_id, answer, user_id, assignments.assignment_id, description, points, grade from student_assignment natural join assignments").fetchall()
  
     return jsonify(ann)
 

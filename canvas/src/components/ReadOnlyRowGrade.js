@@ -7,6 +7,7 @@ const ReadOnlyRow = ({assignment, handleEditClick}) => {
             <td>{assignment.s_assignment_id}</td>
             <td>{assignment.assignment_id}</td>
             <td>{assignment.description}</td>
+            <td>{assignment.answer}</td>
             <td>{assignment.points}</td>
             <td>{assignment.grade}</td>
             <td>

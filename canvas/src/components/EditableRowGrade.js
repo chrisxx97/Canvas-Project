@@ -6,6 +6,7 @@ const EditableRow = ({assignment, handleEditFormChange})=>{
             <td>{assignment.user_id}</td>
             <td>{assignment.assignment_id}</td>
             <td>{assignment.description}</td>
+            <td>{assignment.answer}</td>
             <td>{assignment.points}</td>
             {/* <td>{assignment.grade}</td> */}
             <td>
