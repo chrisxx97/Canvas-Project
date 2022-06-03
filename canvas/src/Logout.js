@@ -10,11 +10,12 @@ export default function Logout() {
     document.getElementById("account").style.display = "none"
     document.getElementById("dashboard").style.display = "none"
     document.getElementById("courses").style.display = "none"
+    document.getElementById("settings").style.display = "none"
 
     //auto redirect to login page
     return (
         <div>
-            Logged out! <br />
+            <h4>Logged out!</h4>
             <a href="/">Click to go back to login page</a>
         </div>
     );

@@ -43,7 +43,7 @@ export default function Login() {
 			<h4 id="login">Log in to Your UChicago Account</h4>
 			<br />
 			<form name="myform" >
-				<input type="text" id="username" name="username" placeholder="name" 
+				<input type="text" id="username" name="username" placeholder="Username"
 				onChange={(e) => setUsername(e.target.value)} /><br />
 				<input type="text" id="pwd" name="pwd" placeholder="Password" 
 				onChange={(e) => setPwd(e.target.value)}/><br /><br />
