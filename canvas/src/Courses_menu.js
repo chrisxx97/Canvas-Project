@@ -28,7 +28,7 @@ class Courses_menu extends Component {
                     </div>
 
                     <div id="courses-content">
-                        <h2>Course name</h2>
+
                         
                     </div>
                 

@@ -24,6 +24,10 @@ INSERT INTO courses VALUES (1, 'Web Development', 6, 30, 'This course is intende
 INSERT INTO courses VALUES (2, 'Cloud Computing', NULL, 40, 'Welcome to Cloud Computing! This course provides an introduction to cloud computing, with a focus on building cloud-deployed web applications.');
 INSERT INTO courses VALUES (3, 'Algorithms', 11, 50, 'This course is about the design and analysis of algorithms. Students will be introduced to the basics of algorithms analysis, several algorithm design paradigms, and problems for which there are no known efficient algorithms. Each of these topics will be illustrated by studying problems and the best known algorithms for solving these problems.');
 INSERT INTO courses VALUES (4, 'Foundations of Computer Networks', 13, 80, 'This course focuses on the principles and techniques used in the development of networked and distributed software. Topics include programming with sockets; concurrent programming; data link layer (Ethernet, packet switching, 802.11, etc.); internet and routing protocols (IP, IPv6, ARP, intra-domain and inter-domain routing, etc.); end-to-end protocols (UDP, TCP); and other commonly used network protocols and techniques.');
+INSERT INTO courses VALUES (5, 'Database', 6, 80, 'Welcome to database');
+INSERT INTO courses VALUES (6, 'Distributed Systems', 6, 80, 'Welcome to database');
+INSERT INTO courses VALUES (7, 'Object oriented Programming', 6, 80, 'Welcome to database');
+
 
 INSERT INTO announcements VALUES (1, 1, '04/04/2022', 'Laptop', 'Hi Class, Make sure you bring your laptop tomorrow to the class. See you all tomorrow!');
 INSERT INTO announcements VALUES (2, 1, '04/15/2022', 'Javascript Lecture', 'The recorded lecture is now available on Canvas.');

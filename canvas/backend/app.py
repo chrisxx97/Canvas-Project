@@ -80,11 +80,12 @@ def s_grade():
 
 @app.route('/t_grade')
 def t_grade():
-    ann = cursor.execute("SELECT s_assignment_id, user_id, assignments.assignment_id, description, points, grade from student_assignment natural join assignments").fetchall()
-    response_body = {
-        "data":ann
-    }
-    return json.dumps(response_body)
+    con = connect
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    ann = cur.execute("SELECT s_assignment_id, user_id, assignments.assignment_id, description, points, grade from student_assignment natural join assignments").fetchall()
+ 
+    return jsonify(ann)
 
 
 @app.route('/users')
@@ -115,8 +116,21 @@ def new_submission():
     assignment_id = req['assignment_id']
     description = req['description']
     due_date = req['due_date']
+    user_id = req['user_id']
     answer = req['answer']
-    cursor.execute(f"UPDATE student_assignment SET answer = '{answer}' where assignment_id = '{assignment_id}';")
+    cursor.execute(f"UPDATE student_assignment SET answer = '{answer}' where assignment_id = {assignment_id} and user_id = {user_id};")
+    connect.commit()
+    return {}
+
+
+@app.route('/new_grade', methods=['GET','POST'])
+def new_grade():
+    req = json.loads(request.data)
+    # assignment_id = req['assignment_id']
+    s_assignment_id = req['s_assignment_id']
+    # student_id = req['user_id']
+    grade = req['grade']
+    cursor.execute(f"UPDATE student_assignment SET grade = '{grade}' where s_assignment_id = {s_assignment_id};")
     connect.commit()
     return {}
 

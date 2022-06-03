@@ -44,34 +44,14 @@ const S_ass = () =>{
                 description:editFormData.description,
                 due_date: editFormData.due_date,
                 answer: editFormData.answer,
-                test: "test"
+                user_id: window.sessionStorage.getItem('user_id'),
             })
-            // body: JSON.stringify(data),
+
             }).then(response=> response.json());
     }
     const handelEditFormSubmit = async (event) => {
         event.preventDefault();
 
-        // const editedAssignment = {
-        //     id: editID,
-        //     description: editFormData.description,
-        //     due_date: editFormData.due_date,
-        //     answer: editFormData.answer
-
-        // };
-
-        // const newAssignments = [... assignments];
-        // const index = assignments.findIndex((assignment)=> assignment.assignment_id === editID);
-        // newAssignments[index] = editedAssignment;
-        // setAssignments(newAssignments);
-
-        // let request = new XMLHttpRequest()
-        // request.open("POST", "/new_submission")
-        // // alert("Success! \nNew Announcement Posted.")
-
-        
-        // request.send(JSON.stringify({"assignment_id":editFormData.assignment_id, 
-        //     "description": editFormData.description, "due_date":editFormData.due_date, "answer":editFormData.answer}))
         submitData();
 
         

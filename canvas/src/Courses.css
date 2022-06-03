@@ -94,7 +94,11 @@
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: #ffffff;
+}
+
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #dad8d8;
 }
 
 textarea {

@@ -16,43 +16,30 @@ import "./Courses.css";
 import T_assignments from "./T_ass";
 
 class Courses_page extends Component {
+
+    // window.sessionStorage.getItem('role');
+
     render() {
+        if (window.sessionStorage.getItem('role') == "student"){
             return (
                 <div className = "flex-container">
                     <div className = "flex-child">
                         <ul className = "secondary_menu">
                             <li  id="Announcement">
-                                <NavLink to = "S_announcements">Student Announcements</NavLink>
-                                
-                            </li>
-
-                            <li id="Announcement">
-                                <NavLink to = "T_announcements">Teacher Announcements</NavLink>
+                                <NavLink to = "S_announcements"> Announcements</NavLink>
                                 
                             </li>
 
                             <li  id="Assignments">
-                                <NavLink to = "S_assignments">Student Assignments</NavLink>
+                                <NavLink to = "S_assignments"> Assignments</NavLink>
                                 
                             </li>
 
-                            <li id="Assignments">
-                                <NavLink to = "T_assignments">Teacher Assignments</NavLink>
-                                
-                            </li>
                             <li  id="Grades">
-                                <NavLink to = "S_grades">Student Grades</NavLink>
+                                <NavLink to = "S_grades"> Grades</NavLink>
                                 
-                            </li>
-
-                            <li id="Grades">
-                                <NavLink to = "T_grades">Teacher Grades</NavLink>
-                                
-                            </li>
-                            
+                            </li>     
                         </ul>
-                        
-                        
                         
                         <Routes>
                             <Route path = "/S_announcements" element = {<S_announcements />}/>
@@ -71,6 +58,49 @@ class Courses_page extends Component {
                  
             
         );
+            }else if (window.sessionStorage.getItem('role') == "teacher"){
+                return (
+                    <div className = "flex-container">
+                        <div className = "flex-child">
+                            <ul className = "secondary_menu">
+    
+                                <li id="Announcement">
+                                    <NavLink to = "T_announcements">Teacher Announcements</NavLink>
+                                    
+                                </li>
+    
+                                <li id="Assignments">
+                                    <NavLink to = "T_assignments">Teacher Assignments</NavLink>
+                                    
+                                </li>
+    
+                                <li id="Grades">
+                                    <NavLink to = "T_grades">Teacher Grades</NavLink>
+                                    
+                                </li>
+                                
+                            </ul>
+                            
+                            
+                            
+                            <Routes>
+                                <Route path = "/S_announcements" element = {<S_announcements />}/>
+                                <Route path = "/T_announcements/*" element = {<T_announcements />}/>
+                                <Route path = "/S_assignments" element = {<S_assignments />}/>
+                                <Route path = "/T_assignments/*" element = {<T_assignments/>}/>
+                                <Route path = "/S_grades" element = {<S_grades />}/>
+                                <Route path = "/T_grades" element = {<T_grades />}/>
+    
+    
+    
+                            </Routes>
+                        </div>
+                    </div>
+                
+                     
+                
+            );
+            }
     }
 }
 
