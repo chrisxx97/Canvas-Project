@@ -137,7 +137,7 @@ class Settings extends Component {
     }
 
     updateUserEmail(idx, newEmail) {
-        document.getElementById("users-table").rows[idx].cells[0].innerHTML = newEmail
+        document.getElementById("users-table").rows[idx].cells[1].innerHTML = newEmail
     }
 
     usersSearchFilter(event) {
