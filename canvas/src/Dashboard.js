@@ -56,6 +56,7 @@ class Dashboard extends Component {
             return (
                 <div>
                     <h2>Dashboard</h2>
+                    <br />
                     <div id="dashboard-admin">
                         <p id='numOfActiveStudents'>Number of active students: </p>
                         <p id='numOfActiveTeachers'>Number of active teachers: </p>
@@ -67,18 +68,21 @@ class Dashboard extends Component {
             return (
                 <div>
                     <h2>Dashboard</h2>
+                    <br />
                     <div id="dashboard-teacher">
                         <h3>Assignments</h3>
                         <div>
                             To be graded
-                            <table id="to-be-graded" border="1">
-                                <tr>
-                                    <th>Assignment</th>
-                                    <th>Course</th>
-                                    <th>Points</th>
-                                    <th>Due Date</th>
-                                </tr>
-                            </table>
+                            <div className="table-responsive">
+                                <table id="to-be-graded" border="1">
+                                    <tr>
+                                        <th>Assignment</th>
+                                        <th>Course</th>
+                                        <th>Points</th>
+                                        <th>Due Date</th>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,44 +91,51 @@ class Dashboard extends Component {
             return (
                 <div>
                     <h2>Dashboard</h2>
+                    <br />
                     <div id="dashboard-student">
                         <h3>Assignments</h3>
                         <div>
                             To Do
-                            <table id="todo" border="1">
-                                <tr>
-                                    <th>Assignment</th>
-                                    <th>Course</th>
-                                    <th>Points</th>
-                                    <th>Due Date</th>
-                                </tr>
-                            </table>
+                            <div className="table-responsive">
+                                <table id="todo" border="1">
+                                    <tr>
+                                        <th>Assignment</th>
+                                        <th>Course</th>
+                                        <th>Points</th>
+                                        <th>Due Date</th>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                         <br />
 
                         <div>
                             Upcoming
-                            <table id="upcoming" border="1">
-                                <tr>
-                                    <th>Assignment</th>
-                                    <th>Course</th>
-                                    <th>Points</th>
-                                    <th>Due Date</th>
-                                </tr>
-                            </table>
+                            <div className="table-responsive">
+                                <table id="upcoming" border="1">
+                                    <tr>
+                                        <th>Assignment</th>
+                                        <th>Course</th>
+                                        <th>Points</th>
+                                        <th>Due Date</th>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                         <br />
 
                         <div>
                             Past
-                            <table id="past" border="1">
-                                <tr>
-                                    <th>Assignment</th>
-                                    <th>Course</th>
-                                    <th>Points</th>
-                                    <th>Due Date</th>
-                                </tr>
-                            </table>
+                            <div className="table-responsive">
+                                <table id="past" border="1">
+                                    <tr>
+                                        <th>Assignment</th>
+                                        <th>Course</th>
+                                        <th>Points</th>
+                                        <th>Due Date</th>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                         <br />
                     </div>

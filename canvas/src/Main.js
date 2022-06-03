@@ -35,48 +35,45 @@ class Main extends Component {
                     <BrowserRouter>
                         <div>
                             <ul id="side-menu">
-                            <li id="logo">
-                                <NavLink id="logo-a" to="/">
-                                    <img id="logo-img" src={require("./assets/UChicago_Shield_2Color_Maroon_WhiteBorder_RGB.png")}
-                                        alt="logo" />
-                                </NavLink>
-                            </li>
-                            <li className="menu-item">
-                                <NavLink to="/account">
-                                    <div>Account</div>
-                                </NavLink>
-                            </li>
-                            <li className="menu-item">
-                                <NavLink to="/">
-                                    <div>Dashboard</div>
-                                </NavLink>
-                            </li>
-                            <li className="menu-item">
-                                <NavLink to="/courses_menu" onclick={openCourseBar}>
-                                <img className = "menu-icon" alt = "" src="course.png"/>
-                                    <div>Courses</div>
-                                </NavLink>
-                            </li>
-                            <li className="menu-item" id="settings">
-                                <NavLink to="/settings">
-                                    <div>Settings</div>
-                                </NavLink>
-                            </li>
-                            <li className="menu-item">
-                                <NavLink to="logout">
-                                    <div>Logout</div>
-                                </NavLink>
-                            </li>
+                                <li id="logo">
+                                    <NavLink id="logo-a" to="/">
+                                        <img id="logo-img" src={require("./assets/UChicago_Shield_2Color_Maroon_WhiteBorder_RGB.png")}
+                                            alt="logo" />
+                                    </NavLink>
+                                </li>
+                                <li className="menu-item" id="account">
+                                    <NavLink to="/account">
+                                        <div>Account</div>
+                                    </NavLink>
+                                </li>
+                                <li className="menu-item" id="dashboard">
+                                    <NavLink to="/">
+                                        <div>Dashboard</div>
+                                    </NavLink>
+                                </li>
+                                <li className="menu-item" id="courses">
+                                    <NavLink to="/courses_menu" onclick={openCourseBar}>
+                                        <div>Courses</div>
+                                    </NavLink>
+                                </li>
+                                <li className="menu-item" id="settings">
+                                    <NavLink to="/settings">
+                                        <div>Settings</div>
+                                    </NavLink>
+                                </li>
+                                <li className="menu-item">
+                                    <NavLink to="logout">
+                                        <div>Logout</div>
+                                    </NavLink>
+                                </li>
                             </ul>
                             
                             <div className="content">
                                 <Routes>
                                     <Route exact path="/" element={<Dashboard />} />
-                                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                                     <Route path="/account" element={<Account />} />
                                     <Route path="/courses_menu/*" element={<Courses_menu />} />
                                     <Route path="/settings" element={<Settings />} />
-                                    {/* <Route path="/logout/*" element={<Logout />} /> */}
                                     <Route exact path="/logout" element={<Logout />} />
                                 </Routes>
                             </div>
@@ -89,9 +86,12 @@ class Main extends Component {
                 <BrowserRouter>
                     <div>
                         <ul id="side-menu">
-
+                            <li id="logo">
+                                <img id="logo-img" src={require("./assets/UChicago_Shield_2Color_Maroon_WhiteBorder_RGB.png")}
+                                     alt="logo" />
+                            </li>
                             <li className="menu-item">
-                                <NavLink to="login">
+                                <NavLink to="/">
                                     <div>Login</div>
                                 </NavLink>
                             </li>
@@ -100,27 +100,21 @@ class Main extends Component {
                                     <div>SignUp</div>
                                 </NavLink>
                             </li>
-
                         </ul>
 
                         <div className="content">
                             <Routes>
                                 <Route exact path="/" element={<Login />} />
                                 <Route path="/logout" element={<Logout />} />
-                                <Route path="/login" element={<Login />} />
                                 <Route path="/signup" element={<SignUp />} />
-                                <Route path="/login/AnswerSq" element={<AnswerSq />} />
+                                <Route path="/AnswerSq" element={<AnswerSq />} />
                             </Routes>
                         </div>
                     </div>
                 </BrowserRouter>
             );
         }
-        // if (window.sessionStorage.getItem('login')) {
-
     }
-    // }
 }
-
 
 export default Main;
