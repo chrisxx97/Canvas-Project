@@ -7,8 +7,8 @@ import Login from "./Login";
     sessionStorage.clear()
     //auto redirect to login page
     return (
-        <>
-        <a href="/login">Click to log out and back to login page!</a>
-        </>       
+        <div>
+            <a href="/">Click to log out and back to login page!</a>
+        </div>
     );
 };

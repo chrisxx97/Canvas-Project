@@ -81,23 +81,29 @@ class Account extends Component {
         return (
             <div>
                 <h2>Account</h2>
-                <h3>Profile</h3>
-                <div>
-                    <p id="account-name"></p>
+                <h4>Profile</h4>
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <p id="account-name"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p id="account-email"></p>
+                    </div>
                 </div>
-                <div>
-                    <p id="account-username"></p>
+                <div className="row">
+                    <div class="col-md-4">
+                        <p id="account-username"></p>
+                    </div>
+                    <div class="col-md-2">
+                        <p id="account-id"></p>
+                    </div>
+                    <div class="col-md-2">
+                        <p id="account-role"></p>
+                    </div>
                 </div>
-                <div>
-                    <p id="account-id"></p>
-                </div>
-                <div>
-                    <p id="account-email"></p>
-                </div>
-                <div>
-                    <p id="account-role"></p>
-                </div>
-                <button id="edit-profile-button" onClick={this.showEditProfileForm}>Edit Profile</button>
+                <br />
+                <button id="edit-profile-button" class="btn btn-primary" onClick={this.showEditProfileForm}>Edit Profile</button>
                 <br />
                 <div id="edit-profile" style={{display: "none"}}>
                     <form onSubmit={this.editProfile}>
