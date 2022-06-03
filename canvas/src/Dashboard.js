@@ -6,8 +6,8 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            role: "student",
-            user_id: 1
+            role: window.sessionStorage.getItem('role'),
+            user_id: window.sessionStorage.getItem('user_id')
         };
     }
 

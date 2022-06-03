@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
+import Login from "./Login";
 
-class Logout extends Component {
-    render() {
-        return (
-            <div>
-                <h2>Logout</h2>
-                Add things here!!
-            </div>
-        );
-    }
-}
-
-export default Logout;
+ export default function Logout() {
+    // set the login boolean to false
+    window.sessionStorage.setItem('login', false)
+    sessionStorage.clear()
+    //auto redirect to login page
+    return (
+        <>
+        <a href="/login">Click to log out and back to login page!</a>
+        </>       
+    );
+};

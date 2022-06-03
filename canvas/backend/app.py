@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import sqlite3, json, time
 from datetime import datetime
 
 app = Flask(__name__)
 cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 connect = sqlite3.connect('sqlite/canvas.db', check_same_thread=False)
 cursor = connect.cursor()
@@ -88,8 +90,13 @@ def t_grade():
 @app.route('/users')
 def get_users():
     users = cursor.execute("SELECT * FROM users;").fetchall()
+@app.route('/users_courses')
+def get_users_courses():
+    users = cursor.execute("SELECT * FROM users WHERE role != 'admin';").fetchall()
+    courses = cursor.execute("SELECT * FROM courses;").fetchall()
     response_body = {
-        "users": users
+        "users": users,
+        "courses": courses
     }
     return json.dumps(response_body)
 
@@ -135,8 +142,10 @@ def new_ass():
 
 @app.route('/<user_id>')
 def dashboard(user_id):
+    if user_id == "favicon.ico":
+        return {}
+
     activeStudents = cursor.execute("SELECT * FROM users WHERE status = 'active' AND role = 'student';").fetchall()
-    activeTeachers = cursor.execute("SELECT * FROM users WHERE status = 'active' AND role = 'teacher';").fetchall()
     activeTeachers = cursor.execute("SELECT * FROM users WHERE status = 'active' AND role = 'teacher';").fetchall()
     courses = cursor.execute("SELECT * FROM courses;").fetchall()
 
@@ -178,3 +187,121 @@ def dashboard(user_id):
         "past": past
     }
     return json.dumps(response_body)
+
+
+@app.route('/login', methods=['GET','POST'])
+def validate_login():
+    req = json.loads(request.data)
+    username = req['username']
+    password = req['pwd']
+    sql = "SELECT password from users WHERE username = '"+username+"';"
+    print(sql)
+    if cursor.execute(sql).fetchone():   # if the user exists in the database
+        matching_password = cursor.execute(sql).fetchone()[0]
+    else:   # make matching password 0 so that login always fails
+        matching_password = 0
+    print(matching_password)
+
+    user = cursor.execute("SELECT user_id, role FROM users WHERE username = '{0}';".format(username)).fetchall()[0]
+    user_id = user[0]
+    role = user[1]
+
+    response_body = {
+        "success": password == matching_password,
+        "user_id": user_id,
+        "role": role
+    }
+    return json.dumps(response_body)
+
+@app.route('/signup', methods=['GET','POST'])
+@cross_origin()
+def sign_up():
+    req = json.loads(request.data)
+    username, name, pwd, email, confirmPwd, sa1, sa2, sa3, role = req['username'], req['name'], req['pwd'], req['email'], req['confirmPwd'], req['sa1'], req['sa2'], req['sa3'], req['role']
+
+    # assign the next number of student id
+    user_id = cursor.execute('SELECT MAX(user_id) from users;').fetchone()[0] + 1
+    print(user_id)
+
+    # add the user to database
+    cursor.execute("INSERT INTO users (user_id, username, password, full_name, email, status, role, security_question_1, security_question_2, security_question_3) VALUES ("+str(user_id)+", '"+username+"', '"+pwd+"', '"+name+"', '"+email+"', 'inactive', '"+role+"', '"+sa1+"', '"+sa2+"', '"+sa3+"');")
+    connect.commit()
+
+    response_body = {
+        'success': True
+    }
+    return json.dumps(response_body)
+    
+@app.route('/login/AnswerSq', methods=['GET','POST'])
+def validate_sq():
+    req = json.loads(request.data)
+    username, sa1, sa2, sa3, pwd = req['username'], req['sa1'], req['sa2'], req['sa3'], req['pwd']
+
+    # first check if user exists
+    user_exists = False
+
+    if cursor.execute("SELECT * from users where username = '"+username+"';").fetchone():
+        print('user exists')
+        user_exists = True
+        # validate security answers
+        answer_match = False
+        # print(cursor.execute("SELECT * from users where username = '"+username+"';").fetchone())
+        if (sa1, sa2, sa3) == cursor.execute("SELECT security_question_1, security_question_2, security_question_3 from users where username = '"+username+"';").fetchone():
+            print('validated')
+            answer_match = True
+            # reset password when user exists and security answers validated
+            cursor.execute("UPDATE users SET password = '"+pwd+"' WHERE username = '"+username+"';")
+            connect.commit()
+
+
+    response_body = {
+        'user_exists': user_exists,
+        'answer_match': answer_match,
+        'new_password': cursor.execute("SELECT password from users where username = '"+username+"';").fetchone()[0]
+    }
+
+    return json.dumps(response_body)
+
+
+
+    # @app.route('/account/<user_name>', methods=['GET'])
+    # def get_account_info(user_name):
+    #     data = cursor.execute("SELECT * from users where")
+
+@app.route('/enrollment', methods=['POST'])
+def enroll():
+    req = json.loads(request.data)
+    user_id = req['user_id']
+    course_to_add = req['course_to_add']
+
+    user = cursor.execute("SELECT * FROM users WHERE user_id = {0};".format(user_id)).fetchall()[0]
+    role = user[6]
+    course = cursor.execute("SELECT * FROM courses WHERE course_id = {0};".format(course_to_add)).fetchall()[0]
+    if role == "teacher":
+        if course[2] != None:
+            msg = course[1] + " already has an instructor"
+        else:
+            cursor.execute("UPDATE courses SET instructor_id = {0} WHERE course_id = {1};".format(user_id, course_to_add))
+            connect.commit()
+            msg = user[3] + " is now the instructor of " + course[1]
+    else:
+        enrollment = cursor.execute("SELECT * FROM enrollments WHERE user_id = {0} AND course_id = {1};".format(user_id, course_to_add)).fetchall()
+        if len(enrollment) > 0:
+            msg = user[3] + " is already enrolled in " + course[1]
+        else:
+            numOfEnrollments = len(cursor.execute("SELECT * FROM enrollments;").fetchall())
+            numOfStudentAssignment = len(cursor.execute("SELECT * FROM student_assignment;").fetchall())
+            cursor.execute("INSERT INTO enrollments VALUES ({0}, {1}, {2});".format(numOfEnrollments+1, user_id, course_to_add))
+            connect.commit()
+            assignments = cursor.execute("SELECT * FROM assignments WHERE course_id = {0};".format(course_to_add)).fetchall()
+            for a in assignments:
+                numOfStudentAssignment += 1
+                cursor.execute("INSERT INTO student_assignment VALUES ({0}, {1}, {2}, NULL, NULL);".format(numOfStudentAssignment, user_id, a[0]))
+                connect.commit()
+            msg = user[3] + " is now enrolled in " + course[1]
+
+    response_body = {
+        "message": msg
+    }
+    return json.dumps(response_body)
+

@@ -23,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 /.idea
+.flaskenv
+__pycache__/
+env/
+*.db
