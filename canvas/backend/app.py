@@ -240,6 +240,14 @@ def validate_login():
     req = json.loads(request.data)
     username = req['username']
     password = req['pwd']
+
+    user = cursor.execute("SELECT * FROM users WHERE username = '{0}';".format(username)).fetchall()[0]
+    if user[5] == 'inactive':
+        response_body = {
+            "inactive": True
+        }
+        return json.dumps(response_body)
+
     sql = "SELECT password from users WHERE username = '"+username+"';"
     print(sql)
     if cursor.execute(sql).fetchone():   # if the user exists in the database
@@ -255,7 +263,8 @@ def validate_login():
     response_body = {
         "success": password == matching_password,
         "user_id": user_id,
-        "role": role
+        "role": role,
+        "inactive": False
     }
     return json.dumps(response_body)
 
